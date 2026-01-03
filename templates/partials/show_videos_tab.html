@@ -1,0 +1,37 @@
+{% set videos = show.get('videos', []) %}
+<div class="card mt-3">
+  <div class="card-header">
+    <strong>Videos (z.B. Probenmitschnitte)</strong>
+  </div>
+  <div class="card-body">
+    <form method="post" action="{{ url_for('upload_video', show_id=show.id) }}" enctype="multipart/form-data" class="mb-3">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="input-group">
+        <input type="file" name="video" accept="video/*" class="form-control" required>
+        <button type="submit" class="btn btn-success">Video hochladen</button>
+      </div>
+    </form>
+    {% if videos %}
+      <div class="row">
+        {% for video in videos %}
+          <div class="col-12 mb-3">
+            <div class="card">
+              <video controls style="max-width:400px; max-height:220px; width:100%; display:block; margin:0 auto;">
+                <source src="{{ url_for('static', filename='videos/' ~ video) }}" type="video/mp4">
+                Ihr Browser unterstützt das Video-Tag nicht.
+              </video>
+              <div class="card-body p-2">
+                <form method="post" action="{{ url_for('delete_video', show_id=show.id, filename=video) }}" onsubmit="return confirm('Video wirklich löschen?');">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-danger btn-sm w-100">Löschen</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="alert alert-info">Noch keine Videos hochgeladen.</div>
+    {% endif %}
+  </div>
+</div>

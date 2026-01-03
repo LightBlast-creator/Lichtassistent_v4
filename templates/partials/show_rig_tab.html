@@ -1,0 +1,852 @@
+{% set rig = show.rig_setup %}
+<div class="tab-pane fade {% if active_tab == 'rig' %}show active{% endif %}" id="tab-rig">
+  <div class="row">
+    <div class="col-md-8">
+      <form method="post" action="{{ url_for('update_rig', show_id=show.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <!-- Main Brand -->
+        <div class="mb-3">
+          <label class="form-label">Main Brand (Hausrig / Hauptmarke)</label>
+          <select name="rig_main_brand" class="form-select form-select-sm">
+            <option value="">– auswählen –</option>
+            {% for m in manufacturers %}
+              <option value="{{ m }}" {% if rig.main_brand == m %}selected{% endif %}>{{ m }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Spots -->
+        <h5 class="h6 mt-3">Spots</h5>
+        <div id="spots-rows" class="mb-2">
+          {% set items = rig.spots_items if rig and rig.spots_items is defined else None %}
+          {% if items %}
+            {% for it in items %}
+              <div class="row mb-2 rig-item-row">
+                <div class="col-md-2">
+                  <label class="form-label">Anzahl</label>
+                  <input type="text" name="rig_spots__count[]" class="form-control form-control-sm" value="{{ it.count }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Hersteller</label>
+                  <select name="rig_spots__manufacturer[]" class="form-select form-select-sm spots-manufacturer">
+                    <option value="">–</option>
+                    {% for m in manufacturers %}
+                      <option value="{{ m }}" {% if it.manufacturer == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Modell</label>
+                  <input type="text" name="rig_spots__model[]" class="form-control form-control-sm spots-model" value="{{ it.model }}" list="spots-model-list-{{ loop.index }}">
+                  <datalist id="spots-model-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="rig_spots__mode[]" class="form-control form-control-sm spots-mode" value="{{ it.mode }}" list="spots-mode-list-{{ loop.index }}">
+                  <datalist id="spots-mode-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="rig_spots__universe[]" class="form-control form-control-sm" value="{{ it.universe }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="rig_spots__address[]" class="form-control form-control-sm" value="{{ it.address }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="rig_spots__watt[]" class="form-control form-control-sm" value="{{ it.watt }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="rig_spots__phase[]" class="form-control form-control-sm" value="{{ it.phase }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="rig_spots__count[]" class="form-control form-control-sm" value="{{ rig.spots or '' }}">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Hersteller</label>
+                <select name="rig_spots__manufacturer[]" class="form-select form-select-sm">
+                  <option value="">–</option>
+                  {% for m in manufacturers %}
+                    <option value="{{ m }}" {% if rig.manufacturer_spots == m %}selected{% endif %}>{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="rig_spots__model[]" class="form-control form-control-sm spots-model" value="" list="spots-model-list-0">
+                  <datalist id="spots-model-list-0"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="rig_spots__mode[]" class="form-control form-control-sm spots-mode" value="" list="spots-mode-list-0">
+                  <datalist id="spots-mode-list-0"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="rig_spots__universe[]" class="form-control form-control-sm" value="{{ rig.universe_spots or '' }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="rig_spots__address[]" class="form-control form-control-sm" value="{{ rig.address_spots or '' }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="rig_spots__watt[]" class="form-control form-control-sm" value="{{ rig.watt_spots or '' }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="rig_spots__phase[]" class="form-control form-control-sm" value="{{ rig.phase_spots or '' }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+                  </div>
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="rig_beams__count[]" class="form-control form-control-sm" value="{{ rig.beams or '' }}">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Hersteller</label>
+                <select name="rig_beams__manufacturer[]" class="form-select form-select-sm">
+                  <option value="">–</option>
+                  {% for m in manufacturers %}
+                    <option value="{{ m }}" {% if rig.manufacturer_beams == m %}selected{% endif %}>{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="rig_beams__model[]" class="form-control form-control-sm beams-model" value="" list="beams-model-list-0">
+                <datalist id="beams-model-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Mode</label>
+                <input type="text" name="rig_beams__mode[]" class="form-control form-control-sm beams-mode" value="" list="beams-mode-list-0">
+                <datalist id="beams-mode-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Universe</label>
+                <input type="text" name="rig_beams__universe[]" class="form-control form-control-sm" value="{{ rig.universe_beams or '' }}">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="rig_beams__address[]" class="form-control form-control-sm" value="{{ rig.address_beams or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Watt</label>
+                <input type="text" name="rig_beams__watt[]" class="form-control form-control-sm" value="{{ rig.watt_beams or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Phase</label>
+                <input type="text" name="rig_beams__phase[]" class="form-control form-control-sm" value="{{ rig.phase_beams or '' }}">
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <button type="button" id="add-beam-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
+        </div>
+
+        <!-- Washes -->
+        <h5 class="h6 mt-4">Washes</h5>
+        <div id="washes-rows" class="mb-2">
+          {% set items = rig.washes_items if rig and rig.washes_items is defined else None %}
+          {% if items %}
+            {% for it in items %}
+              <div class="row mb-2 rig-item-row">
+                <div class="col-md-2">
+                  <label class="form-label">Anzahl</label>
+                  <input type="text" name="rig_washes__count[]" class="form-control form-control-sm" value="{{ it.count }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Hersteller</label>
+                  <select name="rig_washes__manufacturer[]" class="form-select form-select-sm washes-manufacturer">
+                    <option value="">–</option>
+                    {% for m in manufacturers %}
+                      <option value="{{ m }}" {% if it.manufacturer == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Modell</label>
+                  <input type="text" name="rig_washes__model[]" class="form-control form-control-sm washes-model" value="{{ it.model }}" list="washes-model-list-{{ loop.index }}">
+                  <datalist id="washes-model-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="rig_washes__mode[]" class="form-control form-control-sm washes-mode" value="{{ it.mode }}" list="washes-mode-list-{{ loop.index }}">
+                  <datalist id="washes-mode-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="rig_washes__universe[]" class="form-control form-control-sm" value="{{ it.universe }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="rig_washes__address[]" class="form-control form-control-sm" value="{{ it.address }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="rig_washes__watt[]" class="form-control form-control-sm" value="{{ it.watt }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="rig_washes__phase[]" class="form-control form-control-sm" value="{{ it.phase }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="rig_washes__count[]" class="form-control form-control-sm" value="{{ rig.washes or '' }}">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Hersteller</label>
+                <select name="rig_washes__manufacturer[]" class="form-select form-select-sm">
+                  <option value="">–</option>
+                  {% for m in manufacturers %}
+                    <option value="{{ m }}" {% if rig.manufacturer_washes == m %}selected{% endif %}>{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="rig_washes__model[]" class="form-control form-control-sm washes-model" value="" list="washes-model-list-0">
+                <datalist id="washes-model-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Mode</label>
+                <input type="text" name="rig_washes__mode[]" class="form-control form-control-sm washes-mode" value="" list="washes-mode-list-0">
+                <datalist id="washes-mode-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Universe</label>
+                <input type="text" name="rig_washes__universe[]" class="form-control form-control-sm" value="{{ rig.universe_washes or '' }}">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="rig_washes__address[]" class="form-control form-control-sm" value="{{ rig.address_washes or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Watt</label>
+                <input type="text" name="rig_washes__watt[]" class="form-control form-control-sm" value="{{ rig.watt_washes or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Phase</label>
+                <input type="text" name="rig_washes__phase[]" class="form-control form-control-sm" value="{{ rig.phase_washes or '' }}">
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <button type="button" id="add-wash-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
+        </div>
+
+        <!-- Beams -->
+        <h5 class="h6 mt-4">Beams</h5>
+        <div id="beams-rows" class="mb-2">
+          {% set items = rig.beams_items if rig and rig.beams_items is defined else None %}
+          {% if items %}
+            {% for it in items %}
+              <div class="row mb-2 rig-item-row">
+                <div class="col-md-2">
+                  <label class="form-label">Anzahl</label>
+                  <input type="text" name="rig_beams__count[]" class="form-control form-control-sm" value="{{ it.count }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Hersteller</label>
+                  <select name="rig_beams__manufacturer[]" class="form-select form-select-sm beams-manufacturer">
+                    <option value="">–</option>
+                    {% for m in manufacturers %}
+                      <option value="{{ m }}" {% if it.manufacturer == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Modell</label>
+                  <input type="text" name="rig_beams__model[]" class="form-control form-control-sm beams-model" value="{{ it.model }}" list="beams-model-list-{{ loop.index }}">
+                  <datalist id="beams-model-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="rig_beams__mode[]" class="form-control form-control-sm beams-mode" value="{{ it.mode }}" list="beams-mode-list-{{ loop.index }}">
+                  <datalist id="beams-mode-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="rig_beams__universe[]" class="form-control form-control-sm" value="{{ it.universe }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="rig_beams__address[]" class="form-control form-control-sm" value="{{ it.address }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="rig_beams__watt[]" class="form-control form-control-sm" value="{{ it.watt }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="rig_beams__phase[]" class="form-control form-control-sm" value="{{ it.phase }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="rig_beams__count[]" class="form-control form-control-sm" value="{{ rig.beams or '' }}">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Hersteller</label>
+                <select name="rig_beams__manufacturer[]" class="form-select form-select-sm">
+                  <option value="">–</option>
+                  {% for m in manufacturers %}
+                    <option value="{{ m }}" {% if rig.manufacturer_beams == m %}selected{% endif %}>{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="rig_beams__model[]" class="form-control form-control-sm beams-model" value="" list="beams-model-list-0">
+                <datalist id="beams-model-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Mode</label>
+                <input type="text" name="rig_beams__mode[]" class="form-control form-control-sm beams-mode" value="" list="beams-mode-list-0">
+                <datalist id="beams-mode-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Universe</label>
+                <input type="text" name="rig_beams__universe[]" class="form-control form-control-sm" value="{{ rig.universe_beams or '' }}">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="rig_beams__address[]" class="form-control form-control-sm" value="{{ rig.address_beams or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Watt</label>
+                <input type="text" name="rig_beams__watt[]" class="form-control form-control-sm" value="{{ rig.watt_beams or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Phase</label>
+                <input type="text" name="rig_beams__phase[]" class="form-control form-control-sm" value="{{ rig.phase_beams or '' }}">
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <button type="button" id="add-beam-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
+        </div>
+
+        <!-- Blinders -->
+        <h5 class="h6 mt-4">Blinders</h5>
+        <div id="blinders-rows" class="mb-2">
+          {% set items = rig.blinders_items if rig and rig.blinders_items is defined else None %}
+          {% if items %}
+            {% for it in items %}
+              <div class="row mb-2 rig-item-row">
+                <div class="col-md-2">
+                  <label class="form-label">Anzahl</label>
+                  <input type="text" name="rig_blinders__count[]" class="form-control form-control-sm" value="{{ it.count }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Hersteller</label>
+                  <select name="rig_blinders__manufacturer[]" class="form-select form-select-sm blinders-manufacturer">
+                    <option value="">–</option>
+                    {% for m in manufacturers %}
+                      <option value="{{ m }}" {% if it.manufacturer == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Modell</label>
+                  <input type="text" name="rig_blinders__model[]" class="form-control form-control-sm blinders-model" value="{{ it.model }}" list="blinders-model-list-{{ loop.index }}">
+                  <datalist id="blinders-model-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="rig_blinders__mode[]" class="form-control form-control-sm blinders-mode" value="{{ it.mode }}" list="blinders-mode-list-{{ loop.index }}">
+                  <datalist id="blinders-mode-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="rig_blinders__universe[]" class="form-control form-control-sm" value="{{ it.universe }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="rig_blinders__address[]" class="form-control form-control-sm" value="{{ it.address }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="rig_blinders__watt[]" class="form-control form-control-sm" value="{{ it.watt }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="rig_blinders__phase[]" class="form-control form-control-sm" value="{{ it.phase }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="rig_blinders__count[]" class="form-control form-control-sm" value="{{ rig.blinders or '' }}">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Hersteller</label>
+                <select name="rig_blinders__manufacturer[]" class="form-select form-select-sm">
+                  <option value="">–</option>
+                  {% for m in manufacturers %}
+                    <option value="{{ m }}" {% if rig.manufacturer_blinders == m %}selected{% endif %}>{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="rig_blinders__model[]" class="form-control form-control-sm blinders-model" value="" list="blinders-model-list-0">
+                <datalist id="blinders-model-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Mode</label>
+                <input type="text" name="rig_blinders__mode[]" class="form-control form-control-sm blinders-mode" value="" list="blinders-mode-list-0">
+                <datalist id="blinders-mode-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Universe</label>
+                <input type="text" name="rig_blinders__universe[]" class="form-control form-control-sm" value="{{ rig.universe_blinders or '' }}">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="rig_blinders__address[]" class="form-control form-control-sm" value="{{ rig.address_blinders or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Watt</label>
+                <input type="text" name="rig_blinders__watt[]" class="form-control form-control-sm" value="{{ rig.watt_blinders or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Phase</label>
+                <input type="text" name="rig_blinders__phase[]" class="form-control form-control-sm" value="{{ rig.phase_blinders or '' }}">
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <button type="button" id="add-blinder-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
+        </div>
+
+
+        <!-- Strobes (repeatable rows) -->
+        <h5 class="h6 mt-4">Strobes</h5>
+        <div id="strobes-rows" class="mb-2">
+          {% set items = rig.strobes_items if rig and rig.strobes_items is defined else None %}
+          {% if items %}
+            {% for it in items %}
+              <div class="row mb-2 rig-item-row">
+                <div class="col-md-2">
+                  <label class="form-label">Anzahl</label>
+                  <input type="text" name="rig_strobes__count[]" class="form-control form-control-sm" value="{{ it.count }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Hersteller</label>
+                  <select name="rig_strobes__manufacturer[]" class="form-select form-select-sm strobes-manufacturer">
+                    <option value="">–</option>
+                    {% for m in manufacturers %}
+                      <option value="{{ m }}" {% if it.manufacturer == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Modell</label>
+                  <input type="text" name="rig_strobes__model[]" class="form-control form-control-sm strobes-model" value="{{ it.model }}" list="strobes-model-list-{{ loop.index }}">
+                  <datalist id="strobes-model-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="rig_strobes__mode[]" class="form-control form-control-sm strobes-mode" value="{{ it.mode }}" list="strobes-mode-list-{{ loop.index }}">
+                  <datalist id="strobes-mode-list-{{ loop.index }}"></datalist>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="rig_strobes__universe[]" class="form-control form-control-sm" value="{{ it.universe }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="rig_strobes__address[]" class="form-control form-control-sm" value="{{ it.address }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="rig_strobes__watt[]" class="form-control form-control-sm" value="{{ it.watt }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="rig_strobes__phase[]" class="form-control form-control-sm" value="{{ it.phase }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="rig_strobes__count[]" class="form-control form-control-sm" value="{{ rig.strobes or '' }}">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Hersteller</label>
+                <select name="rig_strobes__manufacturer[]" class="form-select form-select-sm">
+                  <option value="">–</option>
+                  {% for m in manufacturers %}
+                    <option value="{{ m }}" {% if rig.manufacturer_strobes == m %}selected{% endif %}>{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="rig_strobes__model[]" class="form-control form-control-sm strobes-model" value="" list="strobes-model-list-0">
+                <datalist id="strobes-model-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Mode</label>
+                <input type="text" name="rig_strobes__mode[]" class="form-control form-control-sm strobes-mode" value="" list="strobes-mode-list-0">
+                <datalist id="strobes-mode-list-0"></datalist>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Universe</label>
+                <input type="text" name="rig_strobes__universe[]" class="form-control form-control-sm" value="{{ rig.universe_strobes or '' }}">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="rig_strobes__address[]" class="form-control form-control-sm" value="{{ rig.address_strobes or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Watt</label>
+                <input type="text" name="rig_strobes__watt[]" class="form-control form-control-sm" value="{{ rig.watt_strobes or '' }}">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Phase</label>
+                <input type="text" name="rig_strobes__phase[]" class="form-control form-control-sm" value="{{ rig.phase_strobes or '' }}">
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <button type="button" id="add-strobe-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
+        </div>
+
+        <!-- Custom Devices (User-defined) -->
+        <h5 class="h6 mt-4">Weitere Lampen / Custom Devices</h5>
+        <div id="custom-devices-rows" class="mb-2">
+          {% set custom_items = rig.custom_devices if rig and rig.custom_devices is defined else None %}
+          {% if custom_items and custom_items|length > 0 %}
+            {% for it in custom_items %}
+              <div class="row mb-2 rig-item-row">
+                <div class="col-md-2">
+                  <label class="form-label">Anzahl</label>
+                  <input type="text" name="custom_devices__count[]" class="form-control form-control-sm" value="{{ it.count }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Name/Typ</label>
+                  <input type="text" name="custom_devices__name[]" class="form-control form-control-sm" value="{{ it.name }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Hersteller</label>
+                  <input type="text" name="custom_devices__manufacturer[]" class="form-control form-control-sm custom-manufacturer" value="{{ it.manufacturer }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Modell</label>
+                  <input type="text" name="custom_devices__model[]" class="form-control form-control-sm custom-model" value="{{ it.model }}">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Mode</label>
+                  <input type="text" name="custom_devices__mode[]" class="form-control form-control-sm custom-mode" value="{{ it.mode }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Universe</label>
+                  <input type="text" name="custom_devices__universe[]" class="form-control form-control-sm" value="{{ it.universe }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" name="custom_devices__address[]" class="form-control form-control-sm" value="{{ it.address }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Watt</label>
+                  <input type="text" name="custom_devices__watt[]" class="form-control form-control-sm" value="{{ it.watt }}">
+                </div>
+                <div class="col-md-1">
+                  <label class="form-label">Phase</label>
+                  <input type="text" name="custom_devices__phase[]" class="form-control form-control-sm" value="{{ it.phase }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="row mb-2 rig-item-row">
+              <div class="col-md-2">
+                <label class="form-label">Anzahl</label>
+                <input type="text" name="custom_devices__count[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Name/Typ</label>
+                <input type="text" name="custom_devices__name[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Hersteller</label>
+                <input type="text" name="custom_devices__manufacturer[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Modell</label>
+                <input type="text" name="custom_devices__model[]" class="form-control form-control-sm custom-model">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Mode</label>
+                <input type="text" name="custom_devices__mode[]" class="form-control form-control-sm custom-mode">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Universe</label>
+                <input type="text" name="custom_devices__universe[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="custom_devices__address[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Watt</label>
+                <input type="text" name="custom_devices__watt[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Phase</label>
+                <input type="text" name="custom_devices__phase[]" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <button type="button" id="add-custom-device-row" class="btn btn-sm btn-outline-light">+ Lampe hinzufügen</button>
+        </div>
+
+        <!-- Positionen & Hinweise -->
+        <div class="mb-3">
+          <label class="form-label">Positionen / Hinweise</label>
+          <textarea name="rig_positions" rows="2"
+                    class="form-control form-control-sm">{{ rig.positions or '' }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Rig-Notizen</label>
+          <textarea name="rig_notes" rows="2"
+                    class="form-control form-control-sm">{{ rig.notes or '' }}</textarea>
+        </div>
+
+        <!-- Strom -->
+        <h5 class="h6 mt-4">Strom</h5>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Main</label>
+            <input type="text" name="rig_power_main" class="form-control form-control-sm"
+                   value="{{ rig.power_main or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Light</label>
+            <input type="text" name="rig_power_light" class="form-control form-control-sm"
+                   value="{{ rig.power_light or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Sound</label>
+            <input type="text" name="rig_power_sound" class="form-control form-control-sm"
+                   value="{{ rig.power_sound or '' }}">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Video</label>
+            <input type="text" name="rig_power_video" class="form-control form-control-sm"
+                   value="{{ rig.power_video or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">FOH</label>
+            <input type="text" name="rig_power_foh" class="form-control form-control-sm"
+                   value="{{ rig.power_foh or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Sonstiges</label>
+            <input type="text" name="rig_power_other" class="form-control form-control-sm"
+                   value="{{ rig.power_other or '' }}">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-sm mt-2">
+          Rig &amp; Strom speichern
+        </button>
+      </form>
+
+      <!-- Power summary (moved to bottom) -->
+      {% if rig_power_summary %}
+        <div class="alert alert-secondary small mt-3">
+          {% if rig_power_summary.total_watt %}
+            <strong>Geschätzte Lichtleistung (aus „Watt gesamt“):</strong>
+            {{ rig_power_summary.total_watt|int }} W
+            (≈ {{ '%.2f'|format(rig_power_summary.total_kw) }} kW)
+            <br>
+            {% if rig_power_summary.apparent_kva %}
+              Scheinleistung bei cos φ ≈ {{ rig_power_summary.cos_phi }}:
+              {{ '%.2f'|format(rig_power_summary.apparent_kva) }} kVA
+              <br>
+            {% endif %}
+            {% if rig_power_summary.current_1ph %}
+              Ca. {{ '%.1f'|format(rig_power_summary.current_1ph) }} A
+              bei 230&nbsp;V 1~ (Single-Phase)
+              <br>
+            {% endif %}
+            {% if rig_power_summary.current_3ph %}
+              Ca. {{ '%.1f'|format(rig_power_summary.current_3ph) }} A je Phase
+              bei 400&nbsp;V 3~ (symmetrisch verteilt)
+              <br>
+            {% endif %}
+          {% endif %}
+        </div>
+      {% endif %}
+  <script>
+  function updateModelOptions(row, type) {
+    const manuSel = row.querySelector('.' + type + '-manufacturer');
+    const modelInput = row.querySelector('.' + type + '-model');
+    const modelList = row.querySelector('datalist[id^="' + type + '-model-list"]');
+    const modeInput = row.querySelector('.' + type + '-mode');
+    const modeList = row.querySelector('datalist[id^="' + type + '-mode-list"]');
+    if (!manuSel || !modelInput || !modelList || !modeInput || !modeList) return;
+    const manu = manuSel.value;
+    // Modelle setzen
+    modelList.innerHTML = '';
+    if (LAMP_MODELS[manu]) {
+      Object.keys(LAMP_MODELS[manu]).forEach(function(model) {
+        const opt = document.createElement('option');
+        opt.value = model;
+        modelList.appendChild(opt);
+      });
+    }
+    // Mode leeren
+    modeList.innerHTML = '';
+  }
+  function updateModeOptions(row, type) {
+    const manuSel = row.querySelector('.' + type + '-manufacturer');
+    const modelInput = row.querySelector('.' + type + '-model');
+    const modeInput = row.querySelector('.' + type + '-mode');
+    const modeList = row.querySelector('datalist[id^="' + type + '-mode-list"]');
+    if (!manuSel || !modelInput || !modeInput || !modeList) return;
+    const manu = manuSel.value;
+    const model = modelInput.value;
+    modeList.innerHTML = '';
+    if (LAMP_MODELS[manu] && LAMP_MODELS[manu][model]) {
+      LAMP_MODELS[manu][model].forEach(function(mode) {
+        const opt = document.createElement('option');
+        opt.value = mode;
+        modeList.appendChild(opt);
+      });
+    }
+  }
+  function setupLampDropdowns(type) {
+    document.querySelectorAll('#' + type + '-rows .rig-item-row').forEach(function(row) {
+      const manuSel = row.querySelector('.' + type + '-manufacturer');
+      const modelSel = row.querySelector('.' + type + '-model');
+      const modeSel = row.querySelector('.' + type + '-mode');
+      if (!manuSel || !modelSel || !modeSel) return;
+      manuSel.addEventListener('change', function() {
+        updateModelOptions(row, type);
+        updateModeOptions(row, type);
+      });
+      modelSel.addEventListener('change', function() {
+        updateModeOptions(row, type);
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    setupLampDropdowns('spots');
+    setupLampDropdowns('washes');
+    setupLampDropdowns('beams');
+    setupLampDropdowns('blinders');
+    setupLampDropdowns('strobes');
+  });
+  function makeAddHandler(addButtonId, containerId) {
+    const addBtn = document.getElementById(addButtonId);
+    const container = document.getElementById(containerId);
+    if (!addBtn || !container) return;
+    addBtn.addEventListener('click', function() {
+      const first = container.querySelector('.rig-item-row');
+      if (!first) return;
+      const clone = first.cloneNode(true);
+      // clear inputs
+      clone.querySelectorAll('input').forEach(i => i.value = '');
+      clone.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+      container.appendChild(clone);
+    });
+  }
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.classList.contains('remove-row')) {
+      const row = e.target.closest('.rig-item-row');
+      if (!row) return;
+      const container = row.parentElement;
+      // Don't remove if it's the last row
+      if (container.querySelectorAll('.rig-item-row').length <= 1) {
+        // just clear fields
+        row.querySelectorAll('input').forEach(i => i.value = '');
+        row.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+      } else {
+        row.remove();
+      }
+    }
+  });
+  makeAddHandler('add-spot-row', 'spots-rows');
+  makeAddHandler('add-wash-row', 'washes-rows');
+  makeAddHandler('add-beam-row', 'beams-rows');
+  makeAddHandler('add-blinder-row', 'blinders-rows');
+  makeAddHandler('add-strobe-row', 'strobes-rows');
+  makeAddHandler('add-custom-device-row', 'custom-devices-rows');
+  </script>
+      </script>
+    </div>
+    <!-- Checklisten-Spalte -->
+    <div class="col-md-4" id="checklists">
+      {% include "partials/checklists_block.html" ignore missing %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+# Python-Cache
+__pycache__/
+*.pyc
+
+# Virtuelle Umgebungen (falls du eine nutzt)
+.venv/
+venv/
+
+# SQLite-Datenbanken
+shows.db
+*.sqlite3
+
+# Flask instance folder
+instance/
+
+# Sonstiges, was nicht ins Repo soll
+.LichtAssistenz.zip
+*.log

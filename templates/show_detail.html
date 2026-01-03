@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% set active_tab = request.args.get("tab", "meta") %}
+
+
+
+{% block content %}
+<div class="container mt-4">
+
+  <!-- Kopfbereich mit Navigation und Aktionen -->
+  <div class="d-flex justify-content-between align-items-start mb-4">
+    <div>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-sm mb-2">
+        ← Zur Übersicht
+      </a>
+      <h1 class="h3 mb-0">{{ show.name or "Unbenannte Show" }}</h1>
+      <div class="small" style="color:#ced4da;">
+        Artist: {{ show.artist or "–" }} | Datum: {{ show.date or "–" }}
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('export_show_pdf', show_id=show.id) }}"
+         class="btn btn-primary btn-sm">
+        Show-Report PDF
+      </a>
+      <a href="{{ url_for('export_techrider_pdf', show_id=show.id) }}"
+         class="btn btn-warning btn-sm">
+        Tech-Rider PDF
+      </a>
+      <a href="{{ url_for('export_ma3', show_id=show.id) }}"
+         class="btn btn-secondary btn-sm">
+        Export MA3 Plugin
+      </a>
+          <form method="post" action="{{ url_for('delete_show', show_id=show.id) }}"
+            onsubmit="return confirm('Show wirklich löschen?');">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-danger btn-sm">
+          Show löschen
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link {% if active_tab == 'meta' %}active{% endif %}"
+         href="{{ url_for('show_detail', show_id=show.id, tab='meta') }}">
+        Stammdaten
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link {% if active_tab == 'rig' %}active{% endif %}"
+         href="{{ url_for('show_detail', show_id=show.id, tab='rig') }}">
+        Rig &amp; Strom
+        
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link {% if active_tab == 'songs' %}active{% endif %}"
+         href="{{ url_for('show_detail', show_id=show.id, tab='songs') }}">
+        Songs / Szenen / Cue-Liste
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link {% if active_tab == 'contacts' %}active{% endif %}"
+         href="{{ url_for('show_detail', show_id=show.id, tab='contacts') }}">
+        Rider / Kontakte
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link {% if active_tab == 'props' %}active{% endif %}"
+         href="{{ url_for('show_detail', show_id=show.id, tab='props') }}">
+        Requisiten
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link {% if active_tab == 'videos' %}active{% endif %}"
+         href="{{ url_for('show_detail', show_id=show.id, tab='videos') }}">
+        Video
+      </a>
+    </li>
+  </ul>
+
+
+  <div class="tab-content pt-3">
+    {% include "partials/show_meta_tab.html" %}
+    {% include "partials/show_rig_tab.html" %}
+    {% include "partials/show_songs_tab.html" %}
+    {% include "partials/show_contacts_tab.html" %}
+    {% include "partials/show_props_tab.html" %}
+    {% if active_tab == 'videos' %}
+    {% include "partials/show_videos_tab.html" %}
+    {% endif %}
+  </div>
+    <li class="nav-item" role="presentation">
+<!-- Auto-Fill: Main Brand -> Hersteller-Felder (Spots/Washes/Beams/Blinders/Strobes) -->
+<script>
+  // ---------------------------------------------------------
+  // 2) Auto-Fill: Main Brand -> Hersteller-Felder
+  // ---------------------------------------------------------
+  const mainBrandSelect = document.querySelector('select[name="rig_main_brand"]');
+  if (mainBrandSelect) {
+      // collect all selects that look like manufacturer fields (single or repeatable)
+      const manufacturerSelects = Array.from(document.querySelectorAll('select')).filter(function(sel) {
+        return sel.name && sel.name.indexOf('manufacturer') !== -1;
+      });
+
+      mainBrandSelect.addEventListener('change', function () {
+        const brand = this.value;
+        if (!brand) return;
+        manufacturerSelects.forEach(function (sel) {
+          if (!sel) return;
+          // Nur übernehmen, wenn das Feld bisher leer/auf "–" steht
+          if (sel.value === '') sel.value = brand;
+        });
+      });
+  }
+</script>
+<script>
+  // Preserve scroll position and active tab across full-page form submits
+  (function(){
+    // prevent browser from doing automatic scroll restoration
+    try{ if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; }catch(e){}
+    const keyScroll = 'show_scroll_{{ show.id }}';
+    const keyTab = 'show_active_tab_{{ show.id }}';
+
+    // before submitting any form, save scroll position and active tab
+    document.querySelectorAll('form').forEach(function(frm){
+      frm.addEventListener('submit', function(){
+        try{
+          sessionStorage.setItem(keyScroll, String(window.scrollY || window.pageYOffset || 0));
+          // store active tab id (if present) as a safe selector like "#tab-rig"
+          const active = document.querySelector('.nav-tabs .nav-link.active');
+          if(active){
+            const href = active.getAttribute('href') || '';
+            let tabId = '';
+            if(href.startsWith('#')){
+              tabId = href;
+            } else {
+              const m = href.match(/[?&]tab=([^&#]+)/);
+              if(m) tabId = '#tab-' + m[1];
+            }
+            if(tabId) sessionStorage.setItem(keyTab, tabId);
+          }
+        }catch(e){/* ignore */}
+      }, {capture:true});
+    });
+
+    // on load, restore scroll position smoothly and (optionally) activate saved tab
+    window.addEventListener('DOMContentLoaded', function(){
+      try{
+        const s = sessionStorage.getItem(keyScroll);
+        const tab = sessionStorage.getItem(keyTab);
+        if(tab){
+          // Activate the saved tab by toggling classes (avoid link.click())
+          setTimeout(function(){
+            try{
+              const allLinks = Array.from(document.querySelectorAll('.nav-tabs .nav-link'));
+              allLinks.forEach(n => n.classList.remove('active'));
+              // try to find a link by matching its href tab parameter or hash
+              let link = document.querySelector('.nav-tabs .nav-link[href="'+tab+'"]');
+              if(!link){
+                link = allLinks.find(l => {
+                  const h = l.getAttribute('href') || '';
+                  return h.indexOf('tab=') !== -1 && h.indexOf(tab.replace('#tab-','')) !== -1;
+                });
+              }
+              if(link) link.classList.add('active');
+
+              // show tab-pane without triggering browser focus jump
+              const panes = Array.from(document.querySelectorAll('.tab-pane'));
+              panes.forEach(p => p.classList.remove('show','active'));
+              const pane = document.querySelector(tab);
+              if(pane) pane.classList.add('show','active');
+            }catch(e){/* ignore */}
+          }, 30);
+        }
+        if(s){
+          const y = parseInt(s) || 0;
+          // restore position instantly (no smooth) after a short delay so layout is stable
+          setTimeout(function(){ window.scrollTo(0, y); sessionStorage.removeItem(keyScroll); sessionStorage.removeItem(keyTab); }, 80);
+        }
+      }catch(e){/* ignore */}
+    });
+  })();
+</script>
+{% endblock %}

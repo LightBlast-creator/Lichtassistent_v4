@@ -1,0 +1,78 @@
+<div class="tab-pane fade {% if active_tab == 'meta' %}show active{% endif %}" id="tab-meta">
+  <div class="row">
+    <div class="col-md-8">
+      <form method="post" action="{{ url_for('update_meta', show_id=show.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Show-Name</label>
+            <input type="text" name="name" class="form-control form-control-sm" value="{{ show.name or '' }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Artist</label>
+            <input type="text" name="artist" class="form-control form-control-sm" value="{{ show.artist or '' }}">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Datum</label>
+            <input type="date" name="date" class="form-control form-control-sm" value="{{ show.date or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Venue-Typ</label>
+            <input type="text" name="venue_type" class="form-control form-control-sm" value="{{ show.venue_type or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Genre</label>
+            <input type="text" name="genre" class="form-control form-control-sm" value="{{ show.genre or '' }}">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Rig-Typ</label>
+            <input type="text" name="rig_type" class="form-control form-control-sm" value="{{ show.rig_type or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Regie</label>
+            <input type="text" name="regie" class="form-control form-control-sm" value="{{ show.regie or '' }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Veranstalter</label>
+            <input type="text" name="veranstalter" class="form-control form-control-sm" value="{{ show.veranstalter or '' }}">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">VT-Firma</label>
+            <input type="text" name="vt_firma" class="form-control form-control-sm" value="{{ show.vt_firma or '' }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Technischer Leiter</label>
+            <input type="text" name="technischer_leiter" class="form-control form-control-sm" value="{{ show.technischer_leiter or '' }}">
+          </div>
+        </div>
+        <!-- MA3 Sequence-ID -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">MA3 Sequence-ID</label>
+            <input type="number" name="ma3_sequence_id" class="form-control form-control-sm" min="1" step="1" value="{{ show.ma3_sequence_id or 101 }}">
+            <div class="form-text small text-light">
+              Sequence-Nummer für den MA3-Export (z.&nbsp;B. 101, 201, 301).
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Allgemeine Notizen</label>
+          <textarea name="notes" rows="3" class="form-control form-control-sm">{{ show.notes or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">
+          Stammdaten speichern
+        </button>
+      </form>
+    </div>
+    <!-- Checklisten-Spalte -->
+    <div class="col-md-4" id="checklists">
+      {% include "partials/checklists_block.html" ignore missing %}
+    </div>
+  </div>
+</div>

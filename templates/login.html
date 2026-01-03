@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh; background: #111;">
+    <div class="card p-4 shadow-lg" style="min-width: 320px; max-width: 400px; background: rgba(20,20,20,0.97);">
+        <div class="w-100 d-flex justify-content-center align-items-center mb-3">
+          <object type="image/svg+xml" data="{{ url_for('static', filename='staticimg/LightBlast_Logo_W.svg') }}" style="width: 70%; min-width: 120px; max-width: 220px; height: auto; display: block;">
+            <img src="{{ url_for('static', filename='staticimg/logo.png') }}" alt="Logo" style="width: 70%; min-width: 120px; max-width: 220px; height: auto; display: block;" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div style=\'color:white;font-size:1.2rem;text-align:center;\'>[Logo nicht gefunden]</div>')">
+          </object>
+        </div>
+        <h2 class="mb-4 text-center" style="color:#fff; font-weight:700; letter-spacing:0.02em;">Login</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="post" action="{{ url_for('login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="mb-3">
+                <label for="username" class="form-label" style="color: #fff;">Benutzername</label>
+                <input type="text" class="form-control" id="username" name="username" required autofocus style="color: #fff; background-color: #232323;">
+          </div>
+          <div class="mb-3">
+                <label for="password" class="form-label" style="color: #fff;">Passwort</label>
+                <input type="password" class="form-control" id="password" name="password" required style="color: #fff; background-color: #232323;">
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

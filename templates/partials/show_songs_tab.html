@@ -1,0 +1,145 @@
+<div class="tab-pane fade {% if active_tab == 'songs' %}show active{% endif %}" id="tab-songs">
+  <div class="row">
+    <div class="col-md-8">
+      <!-- Neuen Song/Szene hinzufügen -->
+      <div class="card mb-4">
+        <div class="card-header">Neue Szene / Song anlegen</div>
+        <div class="card-body">
+          <form method="post" action="{{ url_for('add_song_route', show_id=show.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="active_tab" value="songs">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Name / Cue-Name</label>
+                <input type="text" name="song_name" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Stimmung</label>
+                <input type="text" name="song_mood" class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Farben</label>
+                <input type="text" name="song_colors" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Movement Style</label>
+                <input type="text" name="song_movement_style" class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Eye Candy / Specials</label>
+              <input type="text" name="song_eye_candy" class="form-control form-control-sm">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Special Notes</label>
+              <textarea name="song_special_notes" rows="2" class="form-control form-control-sm"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Allgemeine Notizen</label>
+              <textarea name="song_general_notes" rows="2" class="form-control form-control-sm"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Szene / Song hinzufügen</button>
+          </form>
+        </div>
+      </div>
+      <!-- Bestehende Songs/Szenen -->
+      {% set songs = show.songs or [] %}
+      {% if songs %}
+        <h5 class="h6 mb-3">Szene- / Cue-Liste</h5>
+        <div class="d-flex flex-column gap-2">
+          {% for song in songs|sort(attribute="order_index") %}
+            {% set song_key = song.id if song.id is not none else loop.index %}
+            {% set regie_text = (song.special_notes or song.general_notes or '')|replace('\n',' ') %}
+            {% set regie_preview = regie_text|truncate(90, True, '…') %}
+            <div class="card song-card" id="cue-{{ song_key }}" data-song-id="{{ song_key }}">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-link text-start text-decoration-none text-light p-0 flex-grow-1" data-bs-toggle="collapse" data-bs-target="#songCollapse{{ song_key }}" aria-expanded="false" aria-controls="songCollapse{{ song_key }}">
+                  <div class="d-flex align-items-center flex-wrap gap-2">
+                    <span class="badge bg-primary">#{{ song.order_index or loop.index }}</span>
+                    <strong>{{ song.name or "Unbenannte Szene" }}</strong>
+                    <span class="small text-light opacity-75">
+                      {% if regie_preview %}Regie: {{ regie_preview }}{% else %}Regie: –{% endif %}
+                    </span>
+                  </div>
+                </button>
+                <div class="d-flex gap-1 ms-2 flex-shrink-0">
+                  <!-- Move up -->
+                  <form method="post" action="{{ url_for('move_song', show_id=show.id) }}" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="song_id" value="{{ song.id }}">
+                    <input type="hidden" name="direction" value="up">
+                    <input type="hidden" name="focus_cue" value="{{ song_key }}">
+                    <button type="submit" class="btn btn-outline-light btn-sm" title="Nach oben">↑</button>
+                  </form>
+                  <!-- Move down -->
+                  <form method="post" action="{{ url_for('move_song', show_id=show.id) }}" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="song_id" value="{{ song.id }}">
+                    <input type="hidden" name="direction" value="down">
+                    <input type="hidden" name="focus_cue" value="{{ song_key }}">
+                    <button type="submit" class="btn btn-outline-light btn-sm" title="Nach unten">↓</button>
+                  </form>
+                  <!-- Delete -->
+                  <form method="post" action="{{ url_for('delete_song', show_id=show.id) }}" class="d-inline" onsubmit="return confirm('Szene wirklich löschen?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="song_id" value="{{ song.id }}">
+                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Löschen">✕</button>
+                  </form>
+                </div>
+              </div>
+              <div id="songCollapse{{ song_key }}" class="collapse song-collapse" data-song-id="{{ song_key }}">
+                <div class="card-body">
+                  <form method="post" action="{{ url_for('update_song', show_id=show.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="song_id" value="{{ song.id }}">
+                    <div class="row mb-2">
+                      <div class="col-md-6">
+                        <label class="form-label">Name / Cue-Name</label>
+                        <input type="text" name="song_name" class="form-control form-control-sm" value="{{ song.name }}">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Stimmung</label>
+                        <input type="text" name="song_mood" class="form-control form-control-sm" value="{{ song.mood or '' }}">
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-6">
+                        <label class="form-label">Farben</label>
+                        <input type="text" name="song_colors" class="form-control form-control-sm" value="{{ song.colors or '' }}">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Movement Style</label>
+                        <input type="text" name="song_movement_style" class="form-control form-control-sm" value="{{ song.movement_style or '' }}">
+                      </div>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Eye Candy / Specials</label>
+                      <input type="text" name="song_eye_candy" class="form-control form-control-sm" value="{{ song.eye_candy or '' }}">
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Special Notes (Regie)</label>
+                      <textarea name="song_special_notes" rows="2" class="form-control form-control-sm">{{ song.special_notes or '' }}</textarea>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Allgemeine Notizen</label>
+                      <textarea name="song_general_notes" rows="2" class="form-control form-control-sm">{{ song.general_notes or '' }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Szene aktualisieren</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted">Noch keine Songs / Szenen angelegt.</p>
+      {% endif %}
+    </div>
+    <!-- Checklisten-Spalte -->
+    <div class="col-md-4" id="checklists">
+      {% include "partials/checklists_block.html" ignore missing %}
+    </div>
+  </div>
+</div>

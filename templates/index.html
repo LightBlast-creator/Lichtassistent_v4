@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard – Lichtdesign-Assistent{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+
+    <!-- Linke Spalte: Neue Show anlegen -->
+    <div class="col-lg-5 col-xl-4">
+        <div class="card">
+            <div class="card-header">
+                Neue Show anlegen
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="mb-3">
+                        <label class="form-label">Show- / Projektname</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               placeholder="z.B. Tour XYZ">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Artist / Produktion</label>
+                        <input type="text"
+                               name="artist"
+                               class="form-control"
+                               placeholder="Artist / Band / Produktion">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label class="form-label">Datum</label>
+                            <input type="date"
+                                   name="date"
+                                   class="form-control">
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="form-label">Venue-Typ</label>
+                            <input type="text"
+                                   name="venue_type"
+                                   class="form-control"
+                                   placeholder="Club, Festival, Halle …">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label class="form-label">Genre</label>
+                            <input type="text"
+                                   name="genre"
+                                   class="form-control"
+                                   placeholder="z.B. Rock, EDM …">
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="form-label">Rig-Typ</label>
+                            <input type="text"
+                                   name="rig_type"
+                                   class="form-control"
+                                   placeholder="z.B. Festival-Rig">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Show erstellen
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rechte Spalte: Show-Übersicht -->
+    <div class="col-lg-7 col-xl-8">
+        <div class="card show-list-card">
+            <div class="card-header">
+                Show-Übersicht
+            </div>
+            <div class="card-body">
+                {% if shows %}
+                    <div class="list-group list-group-flush">
+                        {% for show in shows %}
+                            <div class="list-group-item show-list-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="show-title">
+                                        {{ show.name or "Unbenannte Show" }}
+                                    </div>
+                                    <div class="show-subtitle">
+                                        Artist:
+                                        {% if show.artist %}
+                                            {{ show.artist }}
+                                        {% else %}
+                                            –
+                                        {% endif %}
+                                        {% if show.date %}
+                                            &nbsp;• {{ show.date }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <a href="{{ url_for('show_detail', show_id=show.id) }}"
+                                   class="btn btn-outline-light btn-sm">
+                                    Details
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-secondary mb-0">
+                        Noch keine Shows angelegt.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

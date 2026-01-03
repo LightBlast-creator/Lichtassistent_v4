@@ -1,0 +1,74 @@
+<div class="tab-pane fade {% if active_tab == 'props' %}show active{% endif %}" id="tab-props">
+  <div class="row">
+    <div class="col-md-8">
+      <h5 class="h6 mb-3">Requisiten-Bilder</h5>
+      {% set selected_song_id = request.args.get('song_id', '') or (show.songs[0].id if show.songs|length > 0 else '') %}
+      <form method="post" action="{{ url_for('upload_prop_image', show_id=show.id) }}?song_id={{ selected_song_id }}" enctype="multipart/form-data" class="mb-4">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="mb-2">
+          <input type="file" name="prop_image" accept="image/*" class="form-control form-control-sm" required>
+        </div>
+        <div class="mb-2">
+          <select name="song_id" id="prop-song-select" class="form-select form-select-sm" required onchange="filterPropImagesBySong()">
+            {% for song in show.songs %}
+              <option value="{{ song.id }}" {% if selected_song_id == song.id|string %}selected{% endif %}>{{ song.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">Bild hochladen</button>
+      </form>
+
+      <div id="prop-images-gallery">
+        {% if show.songs %}
+          {% for song in show.songs %}
+            <div class="prop-song-gallery mb-3" data-song-id="{{ song.id }}" style="display:none;">
+              <h6 class="mb-2">{{ song.name }}</h6>
+              {% if song.prop_images and song.prop_images|length > 0 %}
+                <div class="row g-2">
+                  {% for img in song.prop_images %}
+                    <div class="col-6 col-md-4 col-lg-3">
+                      <div class="card">
+                        <img src="{{ url_for('static', filename='props/' ~ img) }}" class="card-img-top" alt="Requisitenbild">
+                        <div class="card-body p-2">
+                          <form method="post" action="{{ url_for('delete_prop_image', show_id=show.id, filename=img) }}" onsubmit="return confirm('Bild wirklich löschen?');">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="song_id" value="{{ song.id }}">
+                            <button type="submit" class="btn btn-danger btn-sm w-100">Löschen</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <p class="text-muted">Keine Bilder für diesen Song/Cue.</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">Noch keine Songs/Cues vorhanden.</p>
+        {% endif %}
+      </div>
+      <script>
+        function filterPropImagesBySong() {
+          var select = document.getElementById('prop-song-select');
+          var selectedId = select.value;
+          var galleries = document.querySelectorAll('.prop-song-gallery');
+          galleries.forEach(function(gal) {
+            gal.style.display = gal.getAttribute('data-song-id') === selectedId ? '' : 'none';
+          });
+          // Query-Parameter aktualisieren, damit Reload/Redirect den Song beibehält
+          if (history.replaceState) {
+            var url = new URL(window.location.href);
+            url.searchParams.set('song_id', selectedId);
+            history.replaceState(null, '', url);
+          }
+        }
+        // Beim Laden: Immer filtern, damit die Galerie sofort sichtbar ist
+        document.addEventListener('DOMContentLoaded', function() {
+          filterPropImagesBySong();
+        });
+      </script>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+{
+  "shows": [
+    {
+      "id": 43,
+      "name": "asd",
+      "artist": "asd",
+      "date": "",
+      "venue_type": "asd",
+      "genre": "asd",
+      "rig_type": "asd",
+      "regie": "asd",
+      "veranstalter": "asd",
+      "vt_firma": "d",
+      "technischer_leiter": "aa",
+      "notes": "asd",
+      "songs": [
+        {
+          "id": 35,
+          "name": "asd",
+          "order_index": 1,
+          "mood": "asd",
+          "colors": "asd",
+          "movement_style": "as",
+          "eye_candy": "asd",
+          "special_notes": "asd",
+          "general_notes": "asd"
+        },
+        {
+          "id": 36,
+          "name": "1",
+          "order_index": 2,
+          "mood": "1",
+          "colors": "1",
+          "movement_style": "1",
+          "eye_candy": "1",
+          "special_notes": "1",
+          "general_notes": "1"
+        }
+      ],
+      "rig_setup": {
+        "main_brand": "",
+        "manufacturer": "",
+        "spots": "",
+        "manufacturer_spots": "",
+        "universe_spots": "",
+        "address_spots": "",
+        "watt_spots": "",
+        "phase_spots": "",
+        "models_spots": [],
+        "modes_spots": [],
+        "washes": "",
+        "manufacturer_washes": "",
+        "universe_washes": "",
+        "address_washes": "",
+        "watt_washes": "",
+        "phase_washes": "",
+        "models_washes": [],
+        "modes_washes": [],
+        "beams": "",
+        "manufacturer_beams": "",
+        "universe_beams": "",
+        "address_beams": "",
+        "watt_beams": "",
+        "phase_beams": "",
+        "models_beams": [],
+        "modes_beams": [],
+        "blinders": "",
+        "manufacturer_blinders": "",
+        "universe_blinders": "",
+        "address_blinders": "",
+        "watt_blinders": "",
+        "phase_blinders": "",
+        "models_blinders": [],
+        "modes_blinders": [],
+        "strobes": "",
+        "manufacturer_strobes": "",
+        "universe_strobes": "",
+        "address_strobes": "",
+        "watt_strobes": "",
+        "phase_strobes": "",
+        "models_strobes": [],
+        "modes_strobes": [],
+        "positions": "",
+        "notes": "",
+        "count_spots": "",
+        "count_washes": "",
+        "count_beams": "",
+        "count_blinders": "",
+        "count_strobes": "",
+        "truss_info": "",
+        "truss_height": "",
+        "specials": "",
+        "power_main": "",
+        "power_light": "",
+        "power_sound": "",
+        "power_video": "",
+        "power_foh": "",
+        "power_other": "",
+        "spots_items": [
+          {
+            "count": "",
+            "manufacturer": "",
+            "model": "",
+            "mode": "",
+            "universe": "",
+            "address": "",
+            "watt": "",
+            "phase": ""
+          }
+        ],
+        "beams_items": [
+          {
+            "count": "1",
+            "manufacturer": "Ayrton",
+            "model": "1",
+            "mode": "1",
+            "universe": "1",
+            "address": "1",
+            "watt": "1",
+            "phase": "1"
+          }
+        ],
+        "blinders_items": [
+          {
+            "count": "",
+            "manufacturer": "",
+            "model": "",
+            "mode": "",
+            "universe": "",
+            "address": "",
+            "watt": "",
+            "phase": ""
+          }
+        ],
+        "strobes_items": [
+          {
+            "count": "",
+            "manufacturer": "",
+            "model": "",
+            "mode": "",
+            "universe": "",
+            "address": "",
+            "watt": "",
+            "phase": ""
+          }
+        ],
+        "custom_devices": []
+      },
+      "checklists": {
+        "preproduction": [],
+        "aufbau": [],
+        "show": []
+      },
+      "ma3_sequence_id": 101,
+      "prop_images": []
+    }
+  ],
+  "next_show_id": 44,
+  "next_song_id": 37,
+  "next_check_item_id": 36
+}

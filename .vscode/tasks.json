@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Starte Flask Webapp",
+			"type": "shell",
+			"command": "C:/Users/pasca/Lichtassistent_v3/.venv/Scripts/python.exe app.py",
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

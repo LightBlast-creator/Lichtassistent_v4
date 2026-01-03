@@ -1,0 +1,106 @@
+
+<div class="card mb-3">
+  <div class="card-header">
+    Checklisten
+  </div>
+  <div class="card-body">
+
+    {% set checklists = show.checklists or {} %}
+    {% set categories = [
+      ('preproduction', 'Preproduction'),
+      ('aufbau', 'Aufbau'),
+      ('show', 'Show')
+    ] %}
+
+    {% for key, label in categories %}
+      <h6 class="mt-2 mb-1 text-light">{{ label }}</h6>
+
+      {% set items = checklists.get(key, []) %}
+      {% if items %}
+        <ul class="list-group list-group-flush mb-2">
+          {% for item in items %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <!-- Checkbox (done/undone) -->
+              <div class="me-2" style="flex: 1;">
+                <form method="post" action="{{ url_for('toggle_check_item_route', show_id=show.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="category" value="{{ key }}">
+                  <input type="hidden" name="item_id" value="{{ item.id }}">
+
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      onclick="this.form.submit()"
+                      {% if item.done %}checked{% endif %}
+                    >
+                    <label class="form-check-label {% if item.done %}text-decoration-line-through text-muted{% endif %}">
+                      {{ item.text }}
+                    </label>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Edit + Delete -->
+              <div class="d-flex" style="flex: 1; gap: 0.25rem;">
+                <!-- Edit -->
+                <form method="post"
+                      action="{{ url_for('update_check_item_route', show_id=show.id) }}"
+                      class="d-flex flex-grow-1 me-1">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="category" value="{{ key }}">
+                  <input type="hidden" name="item_id" value="{{ item.id }}">
+
+                  <input type="text"
+                         name="text"
+                         value="{{ item.text }}"
+                         class="form-control form-control-sm me-2">
+                  <button type="submit" class="btn btn-outline-light btn-sm">
+                    Speichern
+                  </button>
+                </form>
+
+                <!-- Delete -->
+                <form method="post"
+                      action="{{ url_for('delete_check_item_route', show_id=show.id) }}"
+                      onsubmit="return confirm('Diesen Punkt wirklich löschen?');">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="category" value="{{ key }}">
+                  <input type="hidden" name="item_id" value="{{ item.id }}">
+                  <button type="submit"
+                          class="btn btn-outline-danger btn-sm"
+                          title="Punkt löschen">
+                    ✕
+                  </button>
+                </form>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted mb-1 small">Keine Einträge.</p>
+      {% endif %}
+
+      <!-- Neuen Eintrag für diese Kategorie hinzufügen -->
+      <form method="post"
+        action="{{ url_for('add_check_item_route', show_id=show.id) }}"
+        class="mb-2">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="category" value="{{ key }}">
+
+        <div class="input-group input-group-sm">
+          <input type="text"
+                 name="text"
+                 class="form-control"
+                 placeholder="Neuer Punkt für {{ label }}">
+          <button class="btn btn-outline-light" type="submit">+</button>
+        </div>
+      </form>
+
+      {% if not loop.last %}
+        <hr class="my-2">
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</div>
