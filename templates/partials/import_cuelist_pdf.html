@@ -1,0 +1,12 @@
+<div class="card mb-3">
+  <div class="card-header">PDF-Import: Rollen/Cues aus PDF übernehmen</div>
+  <div class="card-body">
+    <form method="post" action="{{ url_for('import_cuelist_pdf', show_id=show.id) }}" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="mb-2">
+        <input type="file" name="pdf_file" accept="application/pdf" required class="form-control form-control-sm">
+      </div>
+      <button type="submit" class="btn btn-outline-info btn-sm">PDF importieren</button>
+    </form>
+  </div>
+</div>

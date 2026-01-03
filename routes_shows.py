@@ -1,8 +1,166 @@
-# Regie-Ansicht: Nur Cue-Liste, klappbar, keine weiteren Showdaten
+from app import app  # <-- WICHTIG: Flask-App importieren
+# Übernahme der erkannten Cues als neue Szenen/Songs
+import json
+import html
+@app.route("/show/<int:show_id>/import_cuelist_pdf_commit", methods=["POST"])
+def import_cuelist_pdf_commit(show_id: int):
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    cues_json = request.form.get("cues_json")
+    print("[DEBUG] cues_json (raw):", cues_json)
+    if not cues_json:
+        return "Keine Cues erkannt oder übergeben! (Feld leer)", 400
+    # Versuche HTML-Entities zu dekodieren (z.B. &quot; → ")
+    cues_json_decoded = html.unescape(cues_json)
+    print("[DEBUG] cues_json (decoded):", cues_json_decoded)
+    try:
+        cues = json.loads(cues_json_decoded)
+    except Exception as e:
+        return f"Fehler beim Parsen der Cues! ({e})<br><pre>{cues_json_decoded}</pre>", 400
+    if not cues or not isinstance(cues, list):
+        return f"Keine Cues erkannt oder übergeben!<br><pre>{cues_json_decoded}</pre>", 400
+    # Füge Cues als neue Songs/Szenen hinzu
+    if "songs" not in show:
+        show["songs"] = []
+    order_index = max([s.get("order_index", 0) for s in show["songs"]], default=0) + 1
+    for cue in cues:
+        show["songs"].append({
+            "id": int(1e6) + order_index,  # Dummy-ID, damit keine Kollision
+            "order_index": order_index,
+            "name": f"{cue.get('scene') or ''} {cue.get('role') or ''}".strip(),
+            "mood": "",
+            "colors": "",
+            "movement_style": "",
+            "eye_candy": "",
+            "special_notes": cue.get("text", ""),
+            "general_notes": "",
+        })
+        order_index += 1
+    save_data()
+    sync_entire_show_to_db(show)
+    return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
+
+from app import app  # <-- WICHTIG: Flask-App importieren
+import io
+from werkzeug.utils import secure_filename
+try:
+    import PyPDF2
+except ImportError:
+    PyPDF2 = None
+
+import re
+
+@app.route("/show/<int:show_id>/import_cuelist_pdf", methods=["POST"])
+def import_cuelist_pdf(show_id: int):
+    import pdfplumber
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    file = request.files.get("pdf_file")
+    if not file or not file.filename.lower().endswith(".pdf"):
+        return "Keine PDF-Datei hochgeladen!", 400
+    pdf_bytes = file.read()
+    text = ""
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        for page in pdf.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
+
+    # --- Parsing-Logik für Theaterstück ---
+    # 1. Rollen extrahieren
+    roles = []
+    roles_section = re.search(r"Rollen:(.*?)(?:Ort:|Zeit:|Szene|\n\n)", text, re.DOTALL | re.IGNORECASE)
+    if roles_section:
+        for line in roles_section.group(1).splitlines():
+            line = line.strip()
+            if line:
+                role = re.split(r"[\s\t\-–—:]+", line, 1)[0]
+                if role and role.upper() == role:
+                    roles.append(role)
+                elif role:
+                    roles.append(role.split()[0])
+    # Fallback: alle Wörter in Großbuchstaben am Zeilenanfang als Rollenname
+    if not roles:
+        for line in text.splitlines():
+            if re.match(r"^[A-ZÄÖÜß]{2,}( |$)", line):
+                role = line.split()[0]
+                if role not in roles:
+                    roles.append(role)
+
+
+    # 2. Szenen und Cues extrahieren (verbesserte Logik)
+    cues = []
+    current_scene = None
+    current_role = None
+    current_text = []
+    role_patterns = [re.compile(rf"^\s*{re.escape(role)}[\s:：-]*", re.IGNORECASE) for role in roles]
+    marker_patterns = [re.compile(r"(Licht|Ton|Cue|Szene|Musik|Effekt|Sound)", re.IGNORECASE)]
+    cue_number_pattern = re.compile(r"^\s*\d+[.:]?\s*")
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        # Szenenwechsel
+        if re.match(r"Szene ?\d+", line, re.IGNORECASE):
+            if current_role and current_text:
+                cues.append({"scene": current_scene, "role": current_role, "text": " ".join(current_text), "uncertain": False})
+            current_scene = line
+            current_role = None
+            current_text = []
+            continue
+        # Rollenname am Zeilenanfang erkennen
+        matched_role = None
+        for idx, pat in enumerate(role_patterns):
+            m = pat.match(line)
+            if m:
+                matched_role = roles[idx]
+                break
+        if matched_role:
+            if current_role and current_text:
+                cues.append({"scene": current_scene, "role": current_role, "text": " ".join(current_text), "uncertain": False})
+            current_role = matched_role
+            rest = line[m.end():].strip()
+            current_text = [rest] if rest else []
+            continue
+        # Marker wie Licht, Ton, Cue, Musik, Effekt, Sound erkennen
+        marker_found = any(pat.search(line) for pat in marker_patterns)
+        cue_number_found = cue_number_pattern.match(line)
+        # Unsichere Zuordnung: Zeile enthält Marker oder Cue-Nummer, aber keine Rolle
+        if marker_found or cue_number_found:
+            cues.append({"scene": current_scene, "role": None, "text": line, "uncertain": True})
+            continue
+        # Text zur aktuellen Rolle
+        if current_role:
+            current_text.append(line)
+        else:
+            # Zeile ohne erkennbare Rolle oder Marker: als unsicher markieren
+            cues.append({"scene": current_scene, "role": None, "text": line, "uncertain": True})
+    # Letzten Cue speichern
+    if current_role and current_text:
+        cues.append({"scene": current_scene, "role": current_role, "text": " ".join(current_text), "uncertain": False})
+
+    return render_template("import_cuelist_pdf_preview.html", show=show, pdf_text=text, cues=cues, roles=roles)
 from app import app  # <-- WICHTIG: Flask-App importieren
 from flask import Blueprint
 from flask import render_template, request, redirect, url_for, abort, send_file, session
 from pathlib import Path
+# PDF-Export nur für Cue-Liste (mit Lichtler-Marker)
+from pdf_export_cuelist import build_cuelist_pdf
+
+@app.route("/show/<int:show_id>/export_cuelist_pdf")
+def export_cuelist_pdf(show_id: int):
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    buffer, filename = build_cuelist_pdf(show)
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name=filename,
+        mimetype="application/pdf",
+    )
 import werkzeug
 import uuid
 

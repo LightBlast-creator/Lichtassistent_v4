@@ -1,46 +1,498 @@
 {
   "shows": [
     {
-      "id": 45,
-      "name": "pascal",
-      "artist": "pascal",
+      "id": 46,
+      "name": "Pascal",
+      "artist": "Pascal",
       "date": "",
-      "venue_type": "pascal",
-      "genre": "pascal",
-      "rig_type": "pascal",
-      "regie": "pascal",
-      "veranstalter": "pascal",
-      "vt_firma": "pascal",
-      "technischer_leiter": "pascal",
-      "notes": "pascal",
+      "venue_type": "Pascal",
+      "genre": "Pascal",
+      "rig_type": "Pascal",
+      "regie": "Pascal",
+      "veranstalter": "Pascal",
+      "vt_firma": "Pascal",
+      "technischer_leiter": "Pascal",
+      "notes": "Pascal",
       "songs": [
         {
-          "id": 37,
-          "name": "pascal 1",
+          "id": 1000001,
           "order_index": 1,
-          "mood": "pascal 1",
-          "colors": "rot",
-          "movement_style": "langsam",
-          "eye_candy": "pascal",
-          "special_notes": "pascal",
-          "general_notes": "pascal",
-          "prop_images": []
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(Halbdunkel. Ein kleiner Tisch mit Klebeband, Marker, Funkgerät. Von draußen gedämpftes",
+          "general_notes": "",
+          "prop_images": [
+            "46_118f48a6.png"
+          ]
         },
         {
-          "id": 38,
-          "name": "Lisa 2",
+          "id": 1000002,
           "order_index": 2,
-          "mood": "Lisa 2",
-          "colors": "Blau",
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
           "movement_style": "",
-          "eye_candy": "pixel asd",
-          "special_notes": "pascal",
-          "general_notes": "asdasd",
-          "prop_images": []
+          "eye_candy": "",
+          "special_notes": "Publikumsgemurmel. MARA steht mit Klemmbrett, prüft Listen. JONAS kommt mit einem",
+          "general_notes": ""
+        },
+        {
+          "id": 1000003,
+          "order_index": 3,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Kabelbündel herein.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000004,
+          "order_index": 4,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Du bist spät.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000005,
+          "order_index": 5,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Ich bin nicht spät. Ich bin… im letzten Moment rechtzeitig.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000006,
+          "order_index": 6,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Das ist eine romantische Umschreibung für „spät“.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000007,
+          "order_index": 7,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(legt das Kabel ab) Der Dimmerkreis drei hat gezickt. War ein Wackler. Ist jetzt sauber.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000008,
+          "order_index": 8,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "„Sauber“ ist kein Messwert.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000009,
+          "order_index": 9,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Für heute Abend ist es einer. (MARA setzt einen Haken auf dem Klemmbrett.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000010,
+          "order_index": 10,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Hast du den Nebel getestet?",
+          "general_notes": ""
+        },
+        {
+          "id": 1000011,
+          "order_index": 11,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Ja. Einmal kurz. Nicht zu dick. Das Publikum soll ja noch glauben, es sei Kunst und kein Brandschutztest. (ELI kommt hastig herein, im Kostüm halb fertig. Atmet schnell.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000012,
+          "order_index": 12,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "? Ich… ich krieg den Reißverschluss nicht zu. Und̶ und ich hab den ersten Satz vergessen.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000013,
+          "order_index": 13,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(sieht endlich auf, ruhig) Den Reißverschluss kriegen wir hin. Den Satz auch. Atmen.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000014,
+          "order_index": 14,
+          "name": "Szene 1 ELI",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Ich atme doch.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000015,
+          "order_index": 15,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Nein. Du sammelst Luft wie ein Staubsauger. Atmen. Langsam. (ELI versucht es. MARA tritt näher, hilft kurz am Kostüm.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000016,
+          "order_index": 16,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(halb im Spaß) Wenn’s gar nicht geht: improvisieren. Publikum merkt das nicht.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000017,
+          "order_index": 17,
+          "name": "Szene 1 ELI",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Doch! Ich merke das!",
+          "general_notes": ""
+        },
+        {
+          "id": 1000018,
+          "order_index": 18,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(zu JONAS) Keine Improvisation vor Cue 12. Danach können wir über Mut reden.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000019,
+          "order_index": 19,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Cue 12 ist doch das Geräusch̶",
+          "general_notes": ""
+        },
+        {
+          "id": 1000020,
+          "order_index": 20,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(fällt ihm ins Wort) Ich kenne meine Cues.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000021,
+          "order_index": 21,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(Ein kurzes Funksignal. MARA nimmt das Funkgerät.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000022,
+          "order_index": 22,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Zwei Minuten bis Einlass. Kontrolle Licht? Kontrolle Ton?",
+          "general_notes": ""
+        },
+        {
+          "id": 1000023,
+          "order_index": 23,
+          "name": "Szene 1 STIMME",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(OFF)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000024,
+          "order_index": 24,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(antwortet ins Funkgerät) Licht steht. Ton steht. Bühne steht. Menschen… schwanken noch.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000025,
+          "order_index": 25,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(MARA sieht ELI direkt an.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000026,
+          "order_index": 26,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Du bist vorbereitet. Du weißt das Stück. Du bist nicht dein Puls.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000027,
+          "order_index": 27,
+          "name": "Szene 1 ELI",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(leiser) Und wenn ich’s verkacke?",
+          "general_notes": ""
+        },
+        {
+          "id": 1000028,
+          "order_index": 28,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Dann verkackst du’s mit Haltung. Aber das passiert nicht.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000029,
+          "order_index": 29,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Haltung ist übrigens auch bei Steckern wichtig. Sonst brennt’s.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000030,
+          "order_index": 30,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "Rot weis",
+          "movement_style": "Langsam",
+          "eye_candy": "",
+          "special_notes": ".",
+          "general_notes": ""
+        },
+        {
+          "id": 1000031,
+          "order_index": 31,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Schon gut. Ich bin still. Fast.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000032,
+          "order_index": 32,
+          "name": "Szene 1 ELI",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Warum mach ich das immer wieder?",
+          "general_notes": ""
+        },
+        {
+          "id": 1000033,
+          "order_index": 33,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Weil es einen Moment gibt, in dem alles stimmt. Ein Satz, ein Lichtwechsel, ein Atemzug ‒ und du",
+          "general_notes": ""
+        },
+        {
+          "id": 1000034,
+          "order_index": 34,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "merkst: Das hier lebt. (Draußen wird das Publikum lauter. Ein Gong oder Signal.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000035,
+          "order_index": 35,
+          "name": "Szene 1 STIMME",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(OFF) Einlass jetzt. Plätze füllen sich. (MARA macht einen letzten Haken auf der Liste. Dann schaut sie beide an.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000036,
+          "order_index": 36,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Okay. Letzter Handgriff: Vertrauen. (Sie reicht ELI den Marker.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000037,
+          "order_index": 37,
+          "name": "Szene 1 ELI",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Wofür?",
+          "general_notes": ""
+        },
+        {
+          "id": 1000038,
+          "order_index": 38,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Ritual. Schreib deinen Namen auf das Tape am Tisch. Wie immer. (ELI schreibt. JONAS schaut kurz, nickt.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000039,
+          "order_index": 39,
+          "name": "Szene 1 JONAS",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Siehst du? Du bist da. Das reicht.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000040,
+          "order_index": 40,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Alle Positionen: Wir gehen auf Anfang. Standby für Cue 1… und bitte: ruhig bleiben.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000041,
+          "order_index": 41,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(MARA hebt zwei Finger als Zeichen. ELI richtet das Kostüm, steht gerade. JONAS legt das Kabel ordentlich.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000042,
+          "order_index": 42,
+          "name": "Szene 1",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "(Lichtwechsel. Ende.)",
+          "general_notes": ""
+        },
+        {
+          "id": 1000043,
+          "order_index": 43,
+          "name": "Szene 1 MARA",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Und jetzt: Vorhang auf.",
+          "general_notes": ""
         }
       ],
       "rig_setup": {
-        "main_brand": "MA Lighting",
+        "main_brand": "Ayrton",
         "manufacturer": "",
         "spots": "",
         "manufacturer_spots": "",
@@ -101,61 +553,31 @@
         "spots_items": [
           {
             "count": "1",
-            "manufacturer": "MA Lighting",
-            "model": "1",
-            "mode": "1",
-            "universe": "1",
-            "address": "1",
-            "watt": "",
-            "phase": ""
-          }
-        ],
-        "washes_items": [
-          {
-            "count": "",
-            "manufacturer": "MA Lighting",
-            "model": "",
-            "mode": "",
-            "universe": "",
-            "address": "",
-            "watt": "",
-            "phase": ""
-          }
-        ],
-        "beams_items": [
-          {
-            "count": "1",
-            "manufacturer": "MA Lighting",
+            "manufacturer": "Ayrton",
             "model": "1",
             "mode": "1",
             "universe": "1",
             "address": "1",
             "watt": "1",
             "phase": "1"
-          },
+          }
+        ],
+        "washes_items": [
+          {
+            "count": "1",
+            "manufacturer": "JB-Lighting",
+            "model": "1",
+            "mode": "1",
+            "universe": "1",
+            "address": "1",
+            "watt": "1",
+            "phase": "1"
+          }
+        ],
+        "beams_items": [
           {
             "count": "",
-            "manufacturer": "MA Lighting",
-            "model": "",
-            "mode": "",
-            "universe": "",
-            "address": "",
-            "watt": "",
-            "phase": ""
-          },
-          {
-            "count": "",
-            "manufacturer": "",
-            "model": "",
-            "mode": "",
-            "universe": "",
-            "address": "",
-            "watt": "",
-            "phase": ""
-          },
-          {
-            "count": "",
-            "manufacturer": "",
+            "manufacturer": "Ayrton",
             "model": "",
             "mode": "",
             "universe": "",
@@ -167,7 +589,7 @@
         "blinders_items": [
           {
             "count": "",
-            "manufacturer": "MA Lighting",
+            "manufacturer": "Ayrton",
             "model": "",
             "mode": "",
             "universe": "",
@@ -179,7 +601,7 @@
         "strobes_items": [
           {
             "count": "",
-            "manufacturer": "MA Lighting",
+            "manufacturer": "Ayrton",
             "model": "",
             "mode": "",
             "universe": "",
@@ -188,17 +610,32 @@
             "phase": ""
           }
         ],
-        "custom_devices": []
+        "custom_devices": [
+          {
+            "count": "1",
+            "name": "1",
+            "manufacturer": "1",
+            "model": "1",
+            "mode": "1",
+            "universe": "1",
+            "address": "1",
+            "watt": "1",
+            "phase": "1"
+          }
+        ]
       },
       "checklists": {
         "preproduction": [],
         "aufbau": [],
         "show": []
       },
-      "ma3_sequence_id": 101
+      "ma3_sequence_id": 102,
+      "videos": [
+        "46_91d697d9.mp4"
+      ]
     }
   ],
-  "next_show_id": 46,
-  "next_song_id": 39,
+  "next_show_id": 47,
+  "next_song_id": 41,
   "next_check_item_id": 36
 }
