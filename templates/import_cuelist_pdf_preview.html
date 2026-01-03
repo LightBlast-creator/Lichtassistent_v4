@@ -13,12 +13,13 @@
   </ul>
   <h5 class="mt-4">Erkannte Cues:</h5>
   <form id="cuesForm" method="post" action="{{ url_for('import_cuelist_pdf_commit', show_id=show.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div style="max-height:30vh;overflow:auto;">
       <table class="table table-dark table-sm">
         <thead><tr><th>Szene</th><th>Rolle</th><th>Text</th><th>Löschen</th></tr></thead>
         <tbody id="cuesTableBody">
           {% for cue in cues %}
-            <tr>
+            <tr {% if cue.uncertain %}style="background-color:#6c2323;" title="Unsicher erkannt"{% endif %}>
               <td><input type="text" name="scene" value="{{ cue.scene or '' }}" class="form-control form-control-sm"></td>
               <td><input type="text" name="role" value="{{ cue.role or '' }}" class="form-control form-control-sm"></td>
               <td><input type="text" name="text" value="{{ cue.text or '' }}" class="form-control form-control-sm"></td>

@@ -1,498 +1,15 @@
 {
   "shows": [
     {
-      "id": 46,
-      "name": "Pascal",
-      "artist": "Pascal",
+      "id": 1,
+      "name": "asd",
+      "artist": "",
       "date": "",
-      "venue_type": "Pascal",
-      "genre": "Pascal",
-      "rig_type": "Pascal",
-      "regie": "Pascal",
-      "veranstalter": "Pascal",
-      "vt_firma": "Pascal",
-      "technischer_leiter": "Pascal",
-      "notes": "Pascal",
-      "songs": [
-        {
-          "id": 1000001,
-          "order_index": 1,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(Halbdunkel. Ein kleiner Tisch mit Klebeband, Marker, Funkgerät. Von draußen gedämpftes",
-          "general_notes": "",
-          "prop_images": [
-            "46_118f48a6.png"
-          ]
-        },
-        {
-          "id": 1000002,
-          "order_index": 2,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Publikumsgemurmel. MARA steht mit Klemmbrett, prüft Listen. JONAS kommt mit einem",
-          "general_notes": ""
-        },
-        {
-          "id": 1000003,
-          "order_index": 3,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Kabelbündel herein.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000004,
-          "order_index": 4,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Du bist spät.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000005,
-          "order_index": 5,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Ich bin nicht spät. Ich bin… im letzten Moment rechtzeitig.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000006,
-          "order_index": 6,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Das ist eine romantische Umschreibung für „spät“.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000007,
-          "order_index": 7,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(legt das Kabel ab) Der Dimmerkreis drei hat gezickt. War ein Wackler. Ist jetzt sauber.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000008,
-          "order_index": 8,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "„Sauber“ ist kein Messwert.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000009,
-          "order_index": 9,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Für heute Abend ist es einer. (MARA setzt einen Haken auf dem Klemmbrett.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000010,
-          "order_index": 10,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Hast du den Nebel getestet?",
-          "general_notes": ""
-        },
-        {
-          "id": 1000011,
-          "order_index": 11,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Ja. Einmal kurz. Nicht zu dick. Das Publikum soll ja noch glauben, es sei Kunst und kein Brandschutztest. (ELI kommt hastig herein, im Kostüm halb fertig. Atmet schnell.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000012,
-          "order_index": 12,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "? Ich… ich krieg den Reißverschluss nicht zu. Und̶ und ich hab den ersten Satz vergessen.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000013,
-          "order_index": 13,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(sieht endlich auf, ruhig) Den Reißverschluss kriegen wir hin. Den Satz auch. Atmen.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000014,
-          "order_index": 14,
-          "name": "Szene 1 ELI",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Ich atme doch.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000015,
-          "order_index": 15,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Nein. Du sammelst Luft wie ein Staubsauger. Atmen. Langsam. (ELI versucht es. MARA tritt näher, hilft kurz am Kostüm.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000016,
-          "order_index": 16,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(halb im Spaß) Wenn’s gar nicht geht: improvisieren. Publikum merkt das nicht.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000017,
-          "order_index": 17,
-          "name": "Szene 1 ELI",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Doch! Ich merke das!",
-          "general_notes": ""
-        },
-        {
-          "id": 1000018,
-          "order_index": 18,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(zu JONAS) Keine Improvisation vor Cue 12. Danach können wir über Mut reden.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000019,
-          "order_index": 19,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Cue 12 ist doch das Geräusch̶",
-          "general_notes": ""
-        },
-        {
-          "id": 1000020,
-          "order_index": 20,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(fällt ihm ins Wort) Ich kenne meine Cues.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000021,
-          "order_index": 21,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(Ein kurzes Funksignal. MARA nimmt das Funkgerät.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000022,
-          "order_index": 22,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Zwei Minuten bis Einlass. Kontrolle Licht? Kontrolle Ton?",
-          "general_notes": ""
-        },
-        {
-          "id": 1000023,
-          "order_index": 23,
-          "name": "Szene 1 STIMME",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(OFF)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000024,
-          "order_index": 24,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(antwortet ins Funkgerät) Licht steht. Ton steht. Bühne steht. Menschen… schwanken noch.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000025,
-          "order_index": 25,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(MARA sieht ELI direkt an.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000026,
-          "order_index": 26,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Du bist vorbereitet. Du weißt das Stück. Du bist nicht dein Puls.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000027,
-          "order_index": 27,
-          "name": "Szene 1 ELI",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(leiser) Und wenn ich’s verkacke?",
-          "general_notes": ""
-        },
-        {
-          "id": 1000028,
-          "order_index": 28,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Dann verkackst du’s mit Haltung. Aber das passiert nicht.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000029,
-          "order_index": 29,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Haltung ist übrigens auch bei Steckern wichtig. Sonst brennt’s.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000030,
-          "order_index": 30,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "Rot weis",
-          "movement_style": "Langsam",
-          "eye_candy": "",
-          "special_notes": ".",
-          "general_notes": ""
-        },
-        {
-          "id": 1000031,
-          "order_index": 31,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Schon gut. Ich bin still. Fast.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000032,
-          "order_index": 32,
-          "name": "Szene 1 ELI",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Warum mach ich das immer wieder?",
-          "general_notes": ""
-        },
-        {
-          "id": 1000033,
-          "order_index": 33,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Weil es einen Moment gibt, in dem alles stimmt. Ein Satz, ein Lichtwechsel, ein Atemzug ‒ und du",
-          "general_notes": ""
-        },
-        {
-          "id": 1000034,
-          "order_index": 34,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "merkst: Das hier lebt. (Draußen wird das Publikum lauter. Ein Gong oder Signal.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000035,
-          "order_index": 35,
-          "name": "Szene 1 STIMME",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(OFF) Einlass jetzt. Plätze füllen sich. (MARA macht einen letzten Haken auf der Liste. Dann schaut sie beide an.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000036,
-          "order_index": 36,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Okay. Letzter Handgriff: Vertrauen. (Sie reicht ELI den Marker.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000037,
-          "order_index": 37,
-          "name": "Szene 1 ELI",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Wofür?",
-          "general_notes": ""
-        },
-        {
-          "id": 1000038,
-          "order_index": 38,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Ritual. Schreib deinen Namen auf das Tape am Tisch. Wie immer. (ELI schreibt. JONAS schaut kurz, nickt.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000039,
-          "order_index": 39,
-          "name": "Szene 1 JONAS",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Siehst du? Du bist da. Das reicht.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000040,
-          "order_index": 40,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Alle Positionen: Wir gehen auf Anfang. Standby für Cue 1… und bitte: ruhig bleiben.",
-          "general_notes": ""
-        },
-        {
-          "id": 1000041,
-          "order_index": 41,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(MARA hebt zwei Finger als Zeichen. ELI richtet das Kostüm, steht gerade. JONAS legt das Kabel ordentlich.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000042,
-          "order_index": 42,
-          "name": "Szene 1",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "(Lichtwechsel. Ende.)",
-          "general_notes": ""
-        },
-        {
-          "id": 1000043,
-          "order_index": 43,
-          "name": "Szene 1 MARA",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "Und jetzt: Vorhang auf.",
-          "general_notes": ""
-        }
-      ],
+      "venue_type": "",
+      "genre": "",
+      "rig_type": "",
       "rig_setup": {
-        "main_brand": "Ayrton",
+        "main_brand": "",
         "manufacturer": "",
         "spots": "",
         "manufacturer_spots": "",
@@ -549,93 +66,298 @@
         "power_sound": "",
         "power_video": "",
         "power_foh": "",
-        "power_other": "",
-        "spots_items": [
-          {
-            "count": "1",
-            "manufacturer": "Ayrton",
-            "model": "1",
-            "mode": "1",
-            "universe": "1",
-            "address": "1",
-            "watt": "1",
-            "phase": "1"
-          }
-        ],
-        "washes_items": [
-          {
-            "count": "1",
-            "manufacturer": "JB-Lighting",
-            "model": "1",
-            "mode": "1",
-            "universe": "1",
-            "address": "1",
-            "watt": "1",
-            "phase": "1"
-          }
-        ],
-        "beams_items": [
-          {
-            "count": "",
-            "manufacturer": "Ayrton",
-            "model": "",
-            "mode": "",
-            "universe": "",
-            "address": "",
-            "watt": "",
-            "phase": ""
-          }
-        ],
-        "blinders_items": [
-          {
-            "count": "",
-            "manufacturer": "Ayrton",
-            "model": "",
-            "mode": "",
-            "universe": "",
-            "address": "",
-            "watt": "",
-            "phase": ""
-          }
-        ],
-        "strobes_items": [
-          {
-            "count": "",
-            "manufacturer": "Ayrton",
-            "model": "",
-            "mode": "",
-            "universe": "",
-            "address": "",
-            "watt": "",
-            "phase": ""
-          }
-        ],
-        "custom_devices": [
-          {
-            "count": "1",
-            "name": "1",
-            "manufacturer": "1",
-            "model": "1",
-            "mode": "1",
-            "universe": "1",
-            "address": "1",
-            "watt": "1",
-            "phase": "1"
-          }
-        ]
+        "power_other": ""
       },
+      "regie": "",
+      "veranstalter": "",
+      "vt_firma": "",
+      "technischer_leiter": "",
+      "notes": "",
+      "songs": [
+        {
+          "id": 1000006,
+          "order_index": 1,
+          "name": "Jonas",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "trat aus dem Schatten, ein Mann mit müden Augen und einem Gesicht, das zu viele Nächte ohne Schlaf gesehen hatte. „Du bist also wirklich gekommen“, sagte er leise.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000007,
+          "order_index": 2,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "nickte. „Ich hab’s versprochen. Außerdem schulde ich dir noch eine Antwort.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000008,
+          "order_index": 3,
+          "name": "Jonas",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "lachte kurz auf – ein trockenes, hartes Lachen. „Antworten? Nach all den Jahren willst du mir Antworten geben? Du hättest einfach wegbleiben können.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000009,
+          "order_index": 4,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "trat einen Schritt näher. „Ich konnte nicht. Nicht, nachdem ich gehört habe, was du vorhast.“ „Was ich vorhabe?“, wiederholte Jonas und drehte sich zu den alten Scheinwerfern, die in der Ecke standen – Relikte aus besseren Zeiten. „Ich will, dass die Leute sich erinnern. An das, was wir waren. An die Bühne. An die Geschichten. Du weißt, dass das hier alles einmal leuchtete.“ „Es ist vorbei, Jonas“, flüsterte sie. „Die Bühne ist eingestürzt, die Fördergelder sind weg, und niemand will mehr Theater sehen, schon gar nicht in dieser Stadt.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000010,
+          "order_index": 5,
+          "name": "Jonas",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "nahm einen Schraubenschlüssel, drehte an einer losen Halterung eines",
+          "general_notes": ""
+        },
+        {
+          "id": 1000011,
+          "order_index": 6,
+          "name": "Scheinwerfer",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "s und sah sie über die Schulter an. „Und genau deshalb müssen wir spielen. Heute Nacht. Zum letzten Mal.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000012,
+          "order_index": 7,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "trat näher, ihr Blick weich, aber entschlossen. „Mit wem willst du spielen? Es gibt niemanden mehr. Nur dich und mich.“ „Dann eben wir zwei“, sagte er ruhig. „Du weißt noch, wie es geht. Du warst immer die Beste.“ Ein Moment der Stille. Draußen heulte der Wind durch die zerbrochenen Fensterrahmen.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000013,
+          "order_index": 8,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "atmete tief ein, und für einen flüchtigen Augenblick lag etwas in der Luft – Erinnerung, Schmerz, Sehnsucht. „Und was ist das Stück?“, fragte sie schließlich.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000014,
+          "order_index": 9,
+          "name": "Jonas",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "lächelte schwach. „Es heißt Das Licht im Staub. Es handelt von zwei Menschen, die vergessen wurden. Von einer Frau, die zu spät kam, und einem Mann, der nie aufgehört hat zu warten.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000015,
+          "order_index": 10,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "„Soll es auch“, antwortete er. „Wir schreiben die letzte Szene heute Nacht.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000016,
+          "order_index": 11,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Er schaltete den Scheinwerfer ein. Ein goldener Lichtkegel schnitt durch den Staub, traf",
+          "general_notes": ""
+        },
+        {
+          "id": 1000017,
+          "order_index": 12,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "blickte zu Boden. „Klingt bekannt.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000018,
+          "order_index": 13,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "und gesagt: Wenn das Licht angeht, ist alles möglich.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000019,
+          "order_index": 14,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "s Gesicht und ließ sie plötzlich jünger wirken. Sie trat in das Licht, als würde sie nach Jahren endlich dorthin zurückkehren, wo sie hingehörte. „Ich erinnere mich an die Premiere“, sagte sie leise. „Du hast hinter der Bühne gestanden",
+          "general_notes": ""
+        },
+        {
+          "id": 1000020,
+          "order_index": 15,
+          "name": "Jonas",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "nickte. „Und du hast gesagt: Aber nur solange das Publikum glaubt.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000021,
+          "order_index": 16,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "lächelte. „Und was, wenn niemand mehr glaubt?“ Er antwortete nicht sofort. Stattdessen ging er zur großen Tür, öffnete sie einen Spalt. Draußen tropfte der Regen vom Vordach. „Dann spielen wir trotzdem. Für uns.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000022,
+          "order_index": 17,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "trat zu ihm. „Und wenn es das letzte Mal ist?“ „Dann wird es das schönste letzte Mal, das diese Halle je gesehen hat.“ Sie stellte sich in die Mitte des Raumes. Jonas schaltete die restlichen Scheinwerfer ein. Einer nach dem anderen flammten sie auf – flackernd, schwach, aber warm. Der Staub tanzte in der Luft, als hätte die Halle selbst geatmet.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000023,
+          "order_index": 18,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "„Man sagt, das Licht stirbt zuletzt. Aber was, wenn es niemand mehr anschaltet?“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000024,
+          "order_index": 19,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "begann zu sprechen, ohne Textbuch, ohne Probe:",
+          "general_notes": ""
+        },
+        {
+          "id": 1000025,
+          "order_index": 20,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "allem, was ungesagt geblieben war. Die Halle wurde wieder zur Bühne, das Licht zum",
+          "general_notes": ""
+        },
+        {
+          "id": 1000026,
+          "order_index": 21,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "alten Lampen. Clara trat aus dem Licht, ging zu Jonas.",
+          "general_notes": ""
+        },
+        {
+          "id": 1000027,
+          "order_index": 22,
+          "name": "",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "Er sah sie an, müde, aber zufrieden. „Jetzt machen wir das Licht aus.“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000028,
+          "order_index": 23,
+          "name": "Jonas",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "antwortete aus der Dunkelheit: „Dann bleibt es in uns. In denen, die sich erinnern.“ Es war kein Theaterstück mehr, sondern ein Bekenntnis. Die Worte flossen, getragen von Zeugen. Als sie endeten, stand die Nacht still. Kein Applaus, kein Publikum – nur das Summen der „Und was jetzt?“",
+          "general_notes": ""
+        },
+        {
+          "id": 1000029,
+          "order_index": 24,
+          "name": "Clara",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": "nickte langsam. Gemeinsam griffen sie zum Schalter. Ein letztes Blinken, ein kurzes Aufglühen – dann Dunkelheit. Doch im Dunkel lag kein Ende. Nur Stille. Und die Ahnung, dass irgendwo, in einer anderen",
+          "general_notes": ""
+        },
+        {
+          "id": 1000030,
+          "order_index": 25,
+          "name": "Nacht",
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
+          "eye_candy": "",
+          "special_notes": ", wieder jemand das Licht einschalten würde.",
+          "general_notes": ""
+        }
+      ],
       "checklists": {
         "preproduction": [],
         "aufbau": [],
         "show": []
-      },
-      "ma3_sequence_id": 102,
-      "videos": [
-        "46_91d697d9.mp4"
-      ]
+      }
     }
   ],
-  "next_show_id": 47,
-  "next_song_id": 41,
+  "next_show_id": 49,
+  "next_song_id": 42,
   "next_check_item_id": 36
 }

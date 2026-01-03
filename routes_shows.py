@@ -1,4 +1,6 @@
-from app import app  # <-- WICHTIG: Flask-App importieren
+# <-- WICHTIG: Flask-App importieren
+from app import app
+from show_logic import find_show, MANUFACTURERS, save_data, sync_entire_show_to_db, remove_song_from_show, remove_show
 # Übernahme der erkannten Cues als neue Szenen/Songs
 import json
 import html
@@ -49,11 +51,14 @@ try:
 except ImportError:
     PyPDF2 = None
 
+
+import spacy
+import pdfplumber
 import re
 
 @app.route("/show/<int:show_id>/import_cuelist_pdf", methods=["POST"])
 def import_cuelist_pdf(show_id: int):
-    import pdfplumber
+    # KI-gestützte Named Entity Recognition mit spaCy
     show = find_show(show_id)
     if not show:
         abort(404)
@@ -68,6 +73,48 @@ def import_cuelist_pdf(show_id: int):
             if page_text:
                 text += page_text + "\n"
 
+    nlp = spacy.load('de_core_news_sm')
+    doc = nlp(text)
+    # spaCy-Entities für Rollen (nur PERSON-Entities als Namen)
+    spacy_roles = set(ent.text for ent in doc.ents if ent.label_ == 'PER')
+    roles = list(spacy_roles)
+    # Debug-Ausgabe für spaCy-Entities
+    print("[spaCy] Erkannte Rollen (nur Namen):", spacy_roles)
+
+    # Szenen und Cues können wie bisher extrahiert werden, falls benötigt
+    spacy_scenes = set(ent.text for ent in doc.ents if ent.label_ in ('ORG', 'LOC') and 'Szene' in ent.text)
+    spacy_cues = [ent.text for ent in doc.ents if ent.label_ in ('MISC', 'EVENT')]
+    print("[spaCy] Erkannte Szenen:", spacy_scenes)
+    print("[spaCy] Erkannte Cues:", spacy_cues)
+
+    # KI-gestützte Named Entity Recognition mit spaCy
+    nlp = spacy.load('de_core_news_sm')
+    doc = nlp(text)
+    # spaCy-Entities für Rollen, Szenen, Cues sammeln
+    spacy_roles = set()
+    spacy_scenes = set()
+    spacy_cues = []
+    for ent in doc.ents:
+        # Rollen: PERSON, Szenen: ORG oder spezielle Marker, Cues: MISC
+        if ent.label_ == 'PER':
+            spacy_roles.add(ent.text)
+        elif ent.label_ in ('ORG', 'LOC') and 'Szene' in ent.text:
+            spacy_scenes.add(ent.text)
+        elif ent.label_ in ('MISC', 'EVENT'):
+            spacy_cues.append(ent.text)
+    cues = []
+    # spaCy-Rollen zu den erkannten Rollen hinzufügen
+    for r in spacy_roles:
+        if r not in roles:
+            roles.append(r)
+    # spaCy-Szenen zu den erkannten Szenen hinzufügen
+    for s in spacy_scenes:
+        if s not in [c.get('scene') for c in cues]:
+            cues.append({'scene': s, 'role': None, 'text': '', 'uncertain': True})
+    # spaCy-Cues als unsichere Cues ergänzen
+    for c in spacy_cues:
+        cues.append({'scene': None, 'role': None, 'text': c, 'uncertain': True})
+
     # --- Parsing-Logik für Theaterstück ---
     # 1. Rollen extrahieren
     roles = []
@@ -81,13 +128,26 @@ def import_cuelist_pdf(show_id: int):
                     roles.append(role)
                 elif role:
                     roles.append(role.split()[0])
-    # Fallback: alle Wörter in Großbuchstaben am Zeilenanfang als Rollenname
+    # Fallback: Wenn spaCy keine Rollen erkennt, suche alle im Text mehrfach vorkommenden, großgeschriebenen Wörter (außer Satzanfänge und Stoppwörter)
     if not roles:
-        for line in text.splitlines():
-            if re.match(r"^[A-ZÄÖÜß]{2,}( |$)", line):
-                role = line.split()[0]
-                if role not in roles:
-                    roles.append(role)
+        from collections import Counter
+        import string
+        import spacy.lang.de.stop_words as stopwords_mod
+        stopwords = set(stopwords_mod.STOP_WORDS)
+        word_counter = Counter()
+        lines = text.splitlines()
+        for line in lines:
+            words = re.findall(r"\b[A-ZÄÖÜß][a-zäöüß]+\b", line)
+            # Ignoriere das erste Wort, wenn es am Satzanfang steht
+            if words:
+                if line and line[0].isupper():
+                    words = words[1:] if len(words) > 1 else []
+            for w in words:
+                if w.lower() not in stopwords and len(w) > 1:
+                    word_counter[w] += 1
+        # Nur Wörter, die mindestens 2x vorkommen und keine Stoppwörter sind
+        fallback_roles = [w for w, c in word_counter.items() if c >= 2]
+        roles.extend(fallback_roles)
 
 
     # 2. Szenen und Cues extrahieren (verbesserte Logik)
@@ -289,81 +349,76 @@ import ma3_export  # MA3-Exportmodul
 from app import app  # Flask-App-Instanz
 
 import math
-import show_logic
-from show_logic import (
-    MANUFACTURERS,
-    create_default_show,
-    create_song,
-    create_check_item,
-    toggle_check_item,
-    remove_show,
-    remove_song_from_show,
-    duplicate_show,
-    find_show,
-    save_data,
-    sync_entire_show_to_db,
-)
+def import_cuelist_pdf(show_id: int):
+    import spacy
+    import pdfplumber
 
-# -----------------------------------------------------------------------------#
-# Dashboard
-# -----------------------------------------------------------------------------#
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    file = request.files.get("pdf_file")
+    if not file or not file.filename.lower().endswith(".pdf"):
+        return "Keine PDF-Datei hochgeladen!", 400
+    pdf_bytes = file.read()
+    text = ""
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        for page in pdf.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
 
+    # --- Parsing-Logik für Theaterstück ---
+    cues = []
+    # 1. Rollen extrahieren
+    roles = []
+    roles_section = re.search(r"Rollen:(.*?)(?:Ort:|Zeit:|Szene|\n\n)", text, re.DOTALL | re.IGNORECASE)
+    if roles_section:
+        for line in roles_section.group(1).splitlines():
+            line = line.strip()
+            if line:
+                role = re.split(r"[\s\t\-–—:]+", line, 1)[0]
+                if role and role.upper() == role:
+                    roles.append(role)
+                elif role:
+                    roles.append(role.split()[0])
+    # Fallback: alle Wörter in Großbuchstaben am Zeilenanfang als Rollenname
+    if not roles:
+        for line in text.splitlines():
+            if re.match(r"^[A-ZÄÖÜß]{2,}( |$)", line):
+                role = line.split()[0]
+                if role not in roles:
+                    roles.append(role)
 
-@app.route("/", methods=["GET", "POST"])
-def dashboard():
-    # Login-Check: Nur eingeloggte User dürfen Dashboard sehen
-    if not session.get('user'):
-        return redirect(url_for('login'))
-
-    """
-    Dashboard: Shows anlegen und Übersicht.
-    - Shows werden weiterhin in shows.json angelegt.
-    - Jede Show wird zusätzlich in der SQLite-DB gespiegelt.
-    """
-
-    if request.method == "POST":
-        name = request.form.get("name", "").strip()
-        artist = request.form.get("artist", "").strip()
-        date = request.form.get("date", "").strip()
-        venue_type = request.form.get("venue_type", "").strip()
-        genre = request.form.get("genre", "").strip()
-        rig_type = request.form.get("rig_type", "").strip()
-
-        # 1) Wie bisher: Show als Dict anlegen + in JSON speichern
-        show = create_default_show(
-            name=name,
-            artist=artist,
-            date=date,
-            venue_type=venue_type,
-            genre=genre,
-            rig_type=rig_type,
-        )
-        show_logic.shows.append(show)
-        save_data()
-
-        # 2) DB-Sync: Show in SQLite spiegeln
-        sync_entire_show_to_db(show)
-
-        return redirect(url_for("show_detail", show_id=show["id"]))
-
-    # GET: Shows kommen weiterhin aus der JSON-Liste
-    return render_template("index.html", shows=show_logic.shows)
-
-
-# -----------------------------------------------------------------------------#
-# Show-Details / Duplizieren / Löschen
-# -----------------------------------------------------------------------------#
-
-
-@app.route("/show/<int:show_id>/duplicate", methods=["POST"])
-def duplicate_show_route(show_id: int):
-    """Route: Show duplizieren und direkt zur neuen Show springen."""
-    new_show = duplicate_show(show_id)
-    if not new_show:
-        return redirect(url_for("dashboard"))
-    return redirect(url_for("show_detail", show_id=new_show["id"]))
-
-
+    # KI-gestützte Named Entity Recognition mit spaCy
+    nlp = spacy.load('de_core_news_sm')
+    doc = nlp(text)
+    # spaCy-Entities für Rollen, Szenen, Cues sammeln
+    spacy_roles = set()
+    spacy_scenes = set()
+    spacy_cues = []
+    for ent in doc.ents:
+        # Rollen: PERSON, Szenen: ORG oder spezielle Marker, Cues: MISC
+        if ent.label_ == 'PER':
+            spacy_roles.add(ent.text)
+        elif ent.label_ in ('ORG', 'LOC') and 'Szene' in ent.text:
+            spacy_scenes.add(ent.text)
+        elif ent.label_ in ('MISC', 'EVENT'):
+            spacy_cues.append(ent.text)
+    # spaCy-Rollen zu den erkannten Rollen hinzufügen
+    for r in spacy_roles:
+        if r not in roles:
+            roles.append(r)
+    # spaCy-Szenen zu den erkannten Szenen hinzufügen
+    for s in spacy_scenes:
+        if s not in [c.get('scene') for c in cues]:
+            cues.append({'scene': s, 'role': None, 'text': '', 'uncertain': True})
+    # spaCy-Cues als unsichere Cues ergänzen
+    for c in spacy_cues:
+        cues.append({'scene': None, 'role': None, 'text': c, 'uncertain': True})
+    # Debug-Ausgabe für spaCy-Entities
+    print("[spaCy] Erkannte Rollen:", spacy_roles)
+    print("[spaCy] Erkannte Szenen:", spacy_scenes)
+    print("[spaCy] Erkannte Cues:", spacy_cues)
 @app.route("/show/<int:show_id>", methods=["GET"])
 def show_detail(show_id: int):
     """

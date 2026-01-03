@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Fehler{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <div class="alert alert-danger">
+    <h4 class="alert-heading">Fehler beim Upload</h4>
+    <p>{{ message }}</p>
+    <div class="mt-3">
+      <strong>Tipp:</strong> Große PDF-Dateien kannst du mit kostenlosen Online-Tools wie <a href="https://www.ilovepdf.com/de/pdf_zusammenfuegen" target="_blank" rel="noopener">iLovePDF</a> oder <a href="https://www.splitpdf.com/" target="_blank" rel="noopener">SplitPDF</a> in kleinere Teile aufteilen.
+    </div>
+    <a href="javascript:history.back()" class="btn btn-outline-danger mt-3">Zurück</a>
+  </div>
+</div>
+{% endblock %}
