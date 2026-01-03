@@ -1,10 +1,58 @@
-
+# Regie-Ansicht: Nur Cue-Liste, klappbar, keine weiteren Showdaten
+from app import app  # <-- WICHTIG: Flask-App importieren
+from flask import Blueprint
 from flask import render_template, request, redirect, url_for, abort, send_file, session
 from pathlib import Path
-from flask import send_file
 import werkzeug
 import uuid
-from app import app  # <-- WICHTIG: Flask-App importieren
+
+
+# Regie-Ansicht: GET = anzeigen, POST = bearbeiten
+@app.route("/show/<int:show_id>/regie", methods=["GET"])
+def show_regie_view(show_id: int):
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    songs = show.get("songs", [])
+    return render_template("regie_view.html", show=show, songs=songs)
+
+# Cue bearbeiten (Name, Regie-Notiz)
+@app.route("/show/<int:show_id>/regie/update_cue", methods=["POST"])
+def regie_update_cue(show_id: int):
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    song_id = request.form.get("song_id", type=int)
+    name = request.form.get("song_name", "").strip()
+    special_notes = request.form.get("song_special_notes", "").strip()
+    for song in show.get("songs", []):
+        if song.get("id") == song_id:
+            song["name"] = name
+            song["special_notes"] = special_notes
+            break
+    save_data()
+    return redirect(url_for("show_regie_view", show_id=show_id))
+
+# Cue-Reihenfolge ändern
+@app.route("/show/<int:show_id>/regie/move_cue", methods=["POST"])
+def regie_move_cue(show_id: int):
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    song_id = request.form.get("song_id", type=int)
+    direction = request.form.get("direction")
+    songs = show.get("songs", [])
+    idx = next((i for i, s in enumerate(songs) if s.get("id") == song_id), None)
+    if idx is not None:
+        if direction == "up" and idx > 0:
+            songs[idx], songs[idx-1] = songs[idx-1], songs[idx]
+        elif direction == "down" and idx < len(songs)-1:
+            songs[idx], songs[idx+1] = songs[idx+1], songs[idx]
+        # Reihenfolge neu setzen
+        for i, s in enumerate(songs, 1):
+            s["order_index"] = i
+        save_data()
+    return redirect(url_for("show_regie_view", show_id=show_id))
 
 # -----------------------------------------------------------------------------#
 # Requisiten-Bilder Löschen
@@ -162,7 +210,7 @@ def duplicate_show_route(show_id: int):
 def show_detail(show_id: int):
     """
     Show-Detailseite: Stammdaten, Songs, Rig, Checklisten.
-    Mit Tab-Logik: active_tab = meta | rig | songs
+    Mit Tab-Logik: active_tab = meta | rig | songs | regie
     """
     show = find_show(show_id)
     if not show:
@@ -171,10 +219,8 @@ def show_detail(show_id: int):
     # Aktiven Tab aus Query-Parameter lesen (Standard: meta/Stammdaten)
     active_tab = request.args.get("tab", "meta")
 
-    # NOTE: POST handling for updates was removed in favor of dedicated
-    # endpoints (e.g. /show/<id>/update_meta, /show/<id>/update_rig,
-    # /show/<id>/add_song, /show/<id>/checklists/*). This keeps the
-    # show_detail view read-only and simplifies authorization and testing.
+    # Regie-Tab: keine Editiermöglichkeiten, nur Anzeige der Cue-Liste mit Regie-Infos
+    # (Die Logik für die Anzeige ist im Template show_regie_tab.html)
 
     # ---------------- GET: Rig-Power-Berechnung ----------------
     rig = show.get("rig_setup", {}) or {}
@@ -587,15 +633,20 @@ def delete_song(show_id: int):
         abort(404)
 
     song_id_raw = request.form.get("song_id", "")
+    from_regie = request.form.get("from_regie")
     try:
         song_id = int(song_id_raw)
     except (TypeError, ValueError):
+        if from_regie:
+            return redirect(url_for("show_regie_view", show_id=show_id))
         return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
     remove_song_from_show(show, song_id)
     save_data()
     sync_entire_show_to_db(show)
 
+    if from_regie:
+        return redirect(url_for("show_regie_view", show_id=show_id))
     return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
 
@@ -607,9 +658,12 @@ def update_song(show_id: int):
         abort(404)
 
     song_id_raw = request.form.get("song_id", "")
+    from_regie = request.form.get("from_regie")
     try:
         song_id = int(song_id_raw)
     except (TypeError, ValueError):
+        if from_regie:
+            return redirect(url_for("show_regie_view", show_id=show_id))
         return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
     for song in show.get("songs", []):
@@ -629,6 +683,8 @@ def update_song(show_id: int):
     save_data()
     sync_entire_show_to_db(show)
 
+    if from_regie:
+        return redirect(url_for("show_regie_view", show_id=show_id))
     return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
 
@@ -641,10 +697,13 @@ def move_song(show_id: int):
 
     song_id_raw = request.form.get("song_id", "")
     direction = request.form.get("direction", "")
+    from_regie = request.form.get("from_regie")
 
     try:
         song_id = int(song_id_raw)
     except (TypeError, ValueError):
+        if from_regie:
+            return redirect(url_for("show_regie_view", show_id=show_id))
         return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
     songs_list = show.get("songs", [])
@@ -655,6 +714,8 @@ def move_song(show_id: int):
             break
 
     if index is None:
+        if from_regie:
+            return redirect(url_for("show_regie_view", show_id=show_id))
         return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
     if direction == "up" and index > 0:
@@ -670,6 +731,8 @@ def move_song(show_id: int):
     save_data()
     sync_entire_show_to_db(show)
 
+    if from_regie:
+        return redirect(url_for("show_regie_view", show_id=show_id))
     return redirect(url_for("show_detail", show_id=show_id, tab="songs"))
 
 

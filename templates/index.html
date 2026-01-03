@@ -98,10 +98,15 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                <a href="{{ url_for('show_detail', show_id=show.id) }}"
-                                   class="btn btn-outline-light btn-sm">
-                                    Details
-                                </a>
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <a href="{{ url_for('show_regie_view', show_id=show.id) }}" class="btn btn-outline-info btn-sm" title="Regie-Ansicht">
+                                                                        <span class="d-none d-md-inline">Regie</span>
+                                                                        <span class="d-md-none">🎬</span>
+                                                                    </a>
+                                                                    <a href="{{ url_for('show_detail', show_id=show.id) }}" class="btn btn-outline-light btn-sm">
+                                                                        Details
+                                                                    </a>
+                                                                </div>
                             </div>
                         {% endfor %}
                     </div>

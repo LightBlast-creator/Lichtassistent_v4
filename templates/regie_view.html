@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}Regie-Ansicht – {{ show.name or 'Show' }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-sm mb-3">← Zurück zur Übersicht</a>
+  <div class="accordion" id="cueAccordion">
+    <style>
+      .accordion-item,
+      .accordion-button {
+        background-color: #23272b;
+        color: #f8f9fa;
+        border: none;
+      }
+      .accordion-button:not(.collapsed) {
+        background-color: #343a40;
+        color: #fff;
+        box-shadow: none;
+      }
+      .accordion-body {
+        background-color: #23272b;
+        color: #f8f9fa;
+      }
+      .accordion-button:focus {
+        box-shadow: none;
+        border-color: #495057;
+      }
+    </style>
+    {% for song in songs|sort(attribute="order_index") %}
+      <div class="accordion-item mb-2">
+        <h2 class="accordion-header" id="heading{{ loop.index }}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+            <span class="badge bg-primary me-2">#{{ song.order_index or loop.index }}</span>
+            <strong>{{ song.name or 'Unbenannte Szene' }}</strong>
+            <span class="small text-light opacity-75 ms-2">
+              {% if song.special_notes or song.general_notes %}Regie: {{ (song.special_notes or song.general_notes)|replace('\n',' ')|truncate(90, True, '…') }}{% else %}Regie: –{% endif %}
+            </span>
+          </button>
+        </h2>
+        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#cueAccordion">
+          <div class="accordion-body">
+            <form method="post" action="{{ url_for('update_song', show_id=show.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="song_id" value="{{ song.id }}">
+              <input type="hidden" name="from_regie" value="1">
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <label class="form-label">Name / Cue-Name</label>
+                  <input type="text" name="song_name" class="form-control form-control-sm" value="{{ song.name }}">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Stimmung</label>
+                  <input type="text" name="song_mood" class="form-control form-control-sm" value="{{ song.mood or '' }}">
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <label class="form-label">Farben</label>
+                  <input type="text" name="song_colors" class="form-control form-control-sm" value="{{ song.colors or '' }}">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Movement Style</label>
+                  <input type="text" name="song_movement_style" class="form-control form-control-sm" value="{{ song.movement_style or '' }}">
+                </div>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Eye Candy / Specials</label>
+                <input type="text" name="song_eye_candy" class="form-control form-control-sm" value="{{ song.eye_candy or '' }}">
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Special Notes (Regie)</label>
+                <textarea name="song_special_notes" rows="2" class="form-control form-control-sm">{{ song.special_notes or '' }}</textarea>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Allgemeine Notizen</label>
+                <textarea name="song_general_notes" rows="2" class="form-control form-control-sm">{{ song.general_notes or '' }}</textarea>
+              </div>
+              <button type="submit" class="btn btn-outline-primary btn-sm">Szene aktualisieren</button>
+            </form>
+            <form method="post" action="{{ url_for('move_song', show_id=show.id) }}" class="d-inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="song_id" value="{{ song.id }}">
+              <input type="hidden" name="direction" value="up">
+              <input type="hidden" name="focus_cue" value="{{ song.id }}">
+              <input type="hidden" name="from_regie" value="1">
+              <button type="submit" class="btn btn-outline-light btn-sm" title="Nach oben">↑</button>
+            </form>
+            <form method="post" action="{{ url_for('move_song', show_id=show.id) }}" class="d-inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="song_id" value="{{ song.id }}">
+              <input type="hidden" name="direction" value="down">
+              <input type="hidden" name="focus_cue" value="{{ song.id }}">
+              <input type="hidden" name="from_regie" value="1">
+              <button type="submit" class="btn btn-outline-light btn-sm" title="Nach unten">↓</button>
+            </form>
+            <form method="post" action="{{ url_for('delete_song', show_id=show.id) }}" class="d-inline" onsubmit="return confirm('Szene wirklich löschen?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="song_id" value="{{ song.id }}">
+              <input type="hidden" name="from_regie" value="1">
+              <button type="submit" class="btn btn-outline-danger btn-sm" title="Löschen">✕</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p class="text-muted">Noch keine Cues/Szenen angelegt.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

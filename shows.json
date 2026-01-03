@@ -1,44 +1,46 @@
 {
   "shows": [
     {
-      "id": 43,
-      "name": "asd",
-      "artist": "asd",
+      "id": 45,
+      "name": "pascal",
+      "artist": "pascal",
       "date": "",
-      "venue_type": "asd",
-      "genre": "asd",
-      "rig_type": "asd",
-      "regie": "asd",
-      "veranstalter": "asd",
-      "vt_firma": "d",
-      "technischer_leiter": "aa",
-      "notes": "asd",
+      "venue_type": "pascal",
+      "genre": "pascal",
+      "rig_type": "pascal",
+      "regie": "pascal",
+      "veranstalter": "pascal",
+      "vt_firma": "pascal",
+      "technischer_leiter": "pascal",
+      "notes": "pascal",
       "songs": [
         {
-          "id": 35,
-          "name": "asd",
+          "id": 37,
+          "name": "pascal 1",
           "order_index": 1,
-          "mood": "asd",
-          "colors": "asd",
-          "movement_style": "as",
-          "eye_candy": "asd",
-          "special_notes": "asd",
-          "general_notes": "asd"
+          "mood": "pascal 1",
+          "colors": "rot",
+          "movement_style": "langsam",
+          "eye_candy": "pascal",
+          "special_notes": "pascal",
+          "general_notes": "pascal",
+          "prop_images": []
         },
         {
-          "id": 36,
-          "name": "1",
+          "id": 38,
+          "name": "Lisa 2",
           "order_index": 2,
-          "mood": "1",
-          "colors": "1",
-          "movement_style": "1",
-          "eye_candy": "1",
-          "special_notes": "1",
-          "general_notes": "1"
+          "mood": "Lisa 2",
+          "colors": "Blau",
+          "movement_style": "",
+          "eye_candy": "pixel asd",
+          "special_notes": "pascal",
+          "general_notes": "asdasd",
+          "prop_images": []
         }
       ],
       "rig_setup": {
-        "main_brand": "",
+        "main_brand": "MA Lighting",
         "manufacturer": "",
         "spots": "",
         "manufacturer_spots": "",
@@ -98,8 +100,20 @@
         "power_other": "",
         "spots_items": [
           {
+            "count": "1",
+            "manufacturer": "MA Lighting",
+            "model": "1",
+            "mode": "1",
+            "universe": "1",
+            "address": "1",
+            "watt": "",
+            "phase": ""
+          }
+        ],
+        "washes_items": [
+          {
             "count": "",
-            "manufacturer": "",
+            "manufacturer": "MA Lighting",
             "model": "",
             "mode": "",
             "universe": "",
@@ -111,16 +125,34 @@
         "beams_items": [
           {
             "count": "1",
-            "manufacturer": "Ayrton",
+            "manufacturer": "MA Lighting",
             "model": "1",
             "mode": "1",
             "universe": "1",
             "address": "1",
             "watt": "1",
             "phase": "1"
-          }
-        ],
-        "blinders_items": [
+          },
+          {
+            "count": "",
+            "manufacturer": "MA Lighting",
+            "model": "",
+            "mode": "",
+            "universe": "",
+            "address": "",
+            "watt": "",
+            "phase": ""
+          },
+          {
+            "count": "",
+            "manufacturer": "",
+            "model": "",
+            "mode": "",
+            "universe": "",
+            "address": "",
+            "watt": "",
+            "phase": ""
+          },
           {
             "count": "",
             "manufacturer": "",
@@ -132,10 +164,22 @@
             "phase": ""
           }
         ],
+        "blinders_items": [
+          {
+            "count": "",
+            "manufacturer": "MA Lighting",
+            "model": "",
+            "mode": "",
+            "universe": "",
+            "address": "",
+            "watt": "",
+            "phase": ""
+          }
+        ],
         "strobes_items": [
           {
             "count": "",
-            "manufacturer": "",
+            "manufacturer": "MA Lighting",
             "model": "",
             "mode": "",
             "universe": "",
@@ -151,11 +195,10 @@
         "aufbau": [],
         "show": []
       },
-      "ma3_sequence_id": 101,
-      "prop_images": []
+      "ma3_sequence_id": 101
     }
   ],
-  "next_show_id": 44,
-  "next_song_id": 37,
+  "next_show_id": 46,
+  "next_song_id": 39,
   "next_check_item_id": 36
 }
