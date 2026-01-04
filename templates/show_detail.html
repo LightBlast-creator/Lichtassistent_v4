@@ -20,21 +20,21 @@
 
     <div class="d-flex gap-2">
       <a href="{{ url_for('export_show_pdf', show_id=show.id) }}"
-         class="btn btn-primary btn-sm">
+         class="btn btn-primary btn-sm btn-highlight">
         Show-Report PDF
       </a>
       <a href="{{ url_for('export_techrider_pdf', show_id=show.id) }}"
-         class="btn btn-warning btn-sm">
+         class="btn btn-warning btn-sm btn-highlight">
         Tech-Rider PDF
       </a>
       <a href="{{ url_for('export_ma3', show_id=show.id) }}"
-         class="btn btn-secondary btn-sm">
+         class="btn btn-secondary btn-sm btn-highlight">
         Export MA3 Plugin
       </a>
-          <form method="post" action="{{ url_for('delete_show', show_id=show.id) }}"
+      <form method="post" action="{{ url_for('delete_show', show_id=show.id) }}"
             onsubmit="return confirm('Show wirklich löschen?');">
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn btn-danger btn-sm">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-danger btn-sm btn-highlight">
           Show löschen
         </button>
       </form>

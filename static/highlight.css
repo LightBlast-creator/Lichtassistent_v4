@@ -1,0 +1,60 @@
+/* Cue-Liste als PDF exportieren: Türkis */
+.btn-highlight.btn-outline-info {
+  background: linear-gradient(90deg, #00bcd4 0%, #4dd0e1 100%);
+  color: #fff;
+  border: none;
+}
+.btn-highlight.btn-outline-info:hover, .btn-highlight.btn-outline-info:focus {
+  background: linear-gradient(90deg, #4dd0e1 0%, #00bcd4 100%);
+  color: #fff;
+}
+/* Custom styles for highlighting important buttons with specific colors */
+.btn-highlight {
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn-highlight:hover, .btn-highlight:focus {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+}
+
+/* Show-Report PDF: Blau */
+.btn-highlight.btn-primary {
+  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+}
+.btn-highlight.btn-primary:hover, .btn-highlight.btn-primary:focus {
+  background: linear-gradient(90deg, #42a5f5 0%, #1976d2 100%);
+}
+
+/* Tech-Rider PDF: Gelb */
+.btn-highlight.btn-warning {
+  background: linear-gradient(90deg, #ffd600 0%, #ffea00 100%);
+  color: #222;
+}
+.btn-highlight.btn-warning:hover, .btn-highlight.btn-warning:focus {
+  background: linear-gradient(90deg, #ffea00 0%, #ffd600 100%);
+  color: #111;
+}
+
+/* Export MA3 Plugin: Orange */
+.btn-highlight.btn-secondary {
+  background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+  color: #222;
+}
+.btn-highlight.btn-secondary:hover, .btn-highlight.btn-secondary:focus {
+  background: linear-gradient(90deg, #ffb74d 0%, #ff9800 100%);
+  color: #111;
+}
+
+/* Show löschen: Rot */
+.btn-highlight.btn-danger {
+  background: linear-gradient(90deg, #e53935 0%, #ff7043 100%);
+  color: #fff;
+}
+.btn-highlight.btn-danger:hover, .btn-highlight.btn-danger:focus {
+  background: linear-gradient(90deg, #ff7043 0%, #e53935 100%);
+  color: #fff;
+}

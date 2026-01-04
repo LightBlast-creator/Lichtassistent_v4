@@ -4,7 +4,7 @@
       {% include "partials/import_cuelist_pdf.html" %}
       <!-- PDF-Export-Button für Cue-Liste -->
       <div class="d-flex justify-content-end mb-2">
-        <a href="{{ url_for('export_cuelist_pdf', show_id=show.id) }}" class="btn btn-outline-info btn-sm">
+        <a href="{{ url_for('export_cuelist_pdf', show_id=show.id) }}" class="btn btn-outline-info btn-sm btn-highlight">
           Cue-Liste als PDF exportieren
         </a>
       </div>
