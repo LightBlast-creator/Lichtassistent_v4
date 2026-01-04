@@ -816,6 +816,7 @@ def delete_show(show_id: int):
     if not show:
         abort(404)
 
+
     # JSON
     remove_show(show_id)
     save_data()
@@ -829,6 +830,10 @@ def delete_show(show_id: int):
     except Exception as e:
         db.session.rollback()
         print(f"[DB] Fehler beim Löschen der Show {show_id}: {e}")
+
+    # Synchronisiere die in-memory-Liste shows nach DB-Löschung
+    from show_logic import load_data
+    load_data()
 
     return redirect(url_for("dashboard"))
 

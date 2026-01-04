@@ -134,7 +134,7 @@ def _empty_checklists() -> Dict:
 
 def load_data() -> None:
     """Lädt Shows + IDs aus shows.json, falls vorhanden, und sorgt für Defaults."""
-    global next_show_id, next_song_id, next_check_item_id
+    global shows, next_show_id, next_song_id, next_check_item_id
 
     if not os.path.exists(DATA_FILE):
         return

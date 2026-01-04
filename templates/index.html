@@ -78,7 +78,7 @@
                 Show-Übersicht
             </div>
             <div class="card-body">
-                {% if shows %}
+                {% if shows and shows|length > 0 %}
                     <div class="list-group list-group-flush">
                         {% for show in shows %}
                             <div class="list-group-item show-list-item d-flex justify-content-between align-items-center">
@@ -98,22 +98,22 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <a href="{{ url_for('show_regie_view', show_id=show.id) }}" class="btn btn-outline-info btn-sm" title="Regie-Ansicht">
-                                                                        <span class="d-none d-md-inline">Regie</span>
-                                                                        <span class="d-md-none">🎬</span>
-                                                                    </a>
-                                                                    <a href="{{ url_for('show_detail', show_id=show.id) }}" class="btn btn-outline-light btn-sm">
-                                                                        Details
-                                                                    </a>
-                                                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a href="{{ url_for('show_regie_view', show_id=show.id) }}" class="btn btn-outline-info btn-sm" title="Regie-Ansicht">
+                                        <span class="d-none d-md-inline">Regie</span>
+                                        <span class="d-md-none">🎬</span>
+                                    </a>
+                                    <a href="{{ url_for('show_detail', show_id=show.id) }}" class="btn btn-outline-light btn-sm">
+                                        Details
+                                    </a>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class="text-secondary mb-0">
-                        Noch keine Shows angelegt.
-                    </p>
+                    <div class="alert alert-info mb-0">
+                        Es sind keine Shows vorhanden. Lege eine neue Show an!
+                    </div>
                 {% endif %}
             </div>
         </div>

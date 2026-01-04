@@ -26,6 +26,8 @@ from show_logic import shows, save_data
 # Dashboard: Show creation form + show list
 @app.route('/', methods=['GET', 'POST'])
 def dashboard():
+    from show_logic import load_data
+    load_data()
     if 'user' not in session:
         return redirect(url_for('login'))
     if request.method == 'POST':
@@ -51,9 +53,6 @@ def dashboard():
             })
             save_data()
         return redirect(url_for('dashboard'))
-    # Nach jedem GET (auch nach Löschen) Daten neu laden
-    from show_logic import load_data
-    load_data()
     return render_template('index.html', shows=shows)
 
 # Optional: /show_overview leitet auf / weiter (altes Routing)
