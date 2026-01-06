@@ -1,9 +1,24 @@
-# <-- WICHTIG: Flask-App importieren
+# Imports and Blueprint creation
+from flask import Blueprint
+shows_bp = Blueprint("shows_bp", __name__)
 from app import app
-from show_logic import find_show, MANUFACTURERS, save_data, sync_entire_show_to_db, remove_song_from_show, remove_show, create_check_item, create_song
+from show_logic import find_show, MANUFACTURERS, save_data, sync_entire_show_to_db, remove_song_from_show, remove_show, create_check_item, create_song, toggle_check_item
 # Übernahme der erkannten Cues als neue Szenen/Songs
 import json
 import html
+
+# Löscht alle Cues (Songs) für eine Show
+@shows_bp.route("/show/<int:show_id>/delete_all_cues", methods=["POST"])
+def delete_all_cues(show_id):
+    show = find_show(show_id)
+    if not show:
+        abort(404)
+    show["songs"] = []
+    save_data()
+    sync_entire_show_to_db(show)
+    return redirect(url_for("shows_bp.show_detail", show_id=show_id))
+
+# Übernahme der erkannten Cues als neue Szenen/Songs
 @app.route("/show/<int:show_id>/import_cuelist_pdf_commit", methods=["POST"])
 def import_cuelist_pdf_commit(show_id: int):
     show = find_show(show_id)
@@ -226,7 +241,7 @@ import uuid
 
 
 # Regie-Ansicht: GET = anzeigen, POST = bearbeiten
-@app.route("/show/<int:show_id>/regie", methods=["GET"])
+@shows_bp.route("/show/<int:show_id>/regie", methods=["GET"])
 def show_regie_view(show_id: int):
     show = find_show(show_id)
     if not show:
@@ -328,16 +343,13 @@ def upload_prop_image(show_id: int):
         return redirect(url_for("show_detail", show_id=show_id, tab="props"))
     # Fallback: altes Verhalten (falls kein Song gewählt)
     if file and file.filename:
-
-        show["prop_images"].remove(filename)
-        found = True
-    if found:
+        ext = werkzeug.utils.secure_filename(file.filename).rsplit(".", 1)[-1].lower()
+        fname = f"{show_id}_{uuid.uuid4().hex[:8]}.{ext}"
+        save_path = Path(app.root_path) / "static" / "props" / fname
+        file.save(str(save_path))
+        show.setdefault("prop_images", []).append(fname)
         save_data()
-        try:
-            (Path(app.root_path) / "static" / "props" / filename).unlink(missing_ok=True)
-        except Exception:
-            pass
-    return redirect(url_for("show_detail", show_id=show_id, tab="props"))
+        return redirect(url_for("show_detail", show_id=show_id, tab="props"))
 from flask import render_template, request, redirect, url_for, abort, send_file, session
 from pathlib import Path
 from flask import send_file

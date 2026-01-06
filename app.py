@@ -15,8 +15,13 @@ from models import db
 # selbst wenn es als Script gestartet wird (python app.py)
 sys.modules["app"] = sys.modules.get(__name__)
 
+
 # Flask-App
 app = Flask(__name__, template_folder="templates")
+
+# Register Blueprint for show routes
+from routes_shows import shows_bp
+app.register_blueprint(shows_bp)
 
 
 

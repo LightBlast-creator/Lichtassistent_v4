@@ -674,6 +674,19 @@
         <button type="submit" class="btn btn-primary btn-sm mt-2">
           Rig &amp; Strom speichern
         </button>
+
+        <!-- Alle Cues löschen Button -->
+        <form method="post" action="{{ url_for('shows_bp.delete_all_cues', show_id=show.id) }}" id="delete-all-cues-form" style="display:inline;">
+          <button type="button" class="btn btn-danger btn-sm mt-3" id="delete-all-cues-btn">Alle Cues löschen</button>
+        </form>
+
+        <script>
+        document.getElementById('delete-all-cues-btn').addEventListener('click', function(e) {
+          if (confirm('Willst du wirklich alle Cues unwiderruflich löschen?')) {
+            document.getElementById('delete-all-cues-form').submit();
+          }
+        });
+        </script>
       </form>
 
       <!-- Power summary (moved to bottom) -->

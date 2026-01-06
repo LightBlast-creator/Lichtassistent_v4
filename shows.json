@@ -136,130 +136,8 @@
       "notes": "",
       "songs": [
         {
-          "id": 1000006,
-          "order_index": 1,
-          "name": "Jonas",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "trat aus dem Schatten, ein Mann mit müden Augen und einem Gesicht, das zu viele Nächte ohne Schlaf gesehen hatte. „Du bist also wirklich gekommen“, sagte er leise.",
-          "general_notes": "",
-          "prop_images": [
-            "1_d37dbf64.jpeg"
-          ]
-        },
-        {
-          "id": 1000007,
-          "order_index": 2,
-          "name": "Clara",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "nickte. „Ich hab’s versprochen. Außerdem schulde ich dir noch eine Antwort.“",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000008,
-          "order_index": 3,
-          "name": "Jonas",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "lachte kurz auf – ein trockenes, hartes Lachen. „Antworten? Nach all den Jahren willst du mir Antworten geben? Du hättest einfach wegbleiben können.“",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000009,
-          "order_index": 4,
-          "name": "Clara",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "trat einen Schritt näher. „Ich konnte nicht. Nicht, nachdem ich gehört habe, was du vorhast.“ „Was ich vorhabe?“, wiederholte Jonas und drehte sich zu den alten Scheinwerfern, die in der Ecke standen – Relikte aus besseren Zeiten. „Ich will, dass die Leute sich erinnern. An das, was wir waren. An die Bühne. An die Geschichten. Du weißt, dass das hier alles einmal leuchtete.“ „Es ist vorbei, Jonas“, flüsterte sie. „Die Bühne ist eingestürzt, die Fördergelder sind weg, und niemand will mehr Theater sehen, schon gar nicht in dieser Stadt.“",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000010,
-          "order_index": 5,
-          "name": "Jonas",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "nahm einen Schraubenschlüssel, drehte an einer losen Halterung eines",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000012,
-          "order_index": 6,
-          "name": "Clara",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "trat näher, ihr Blick weich, aber entschlossen. „Mit wem willst du spielen? Es gibt niemanden mehr. Nur dich und mich.“ „Dann eben wir zwei“, sagte er ruhig. „Du weißt noch, wie es geht. Du warst immer die Beste.“ Ein Moment der Stille. Draußen heulte der Wind durch die zerbrochenen Fensterrahmen.",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000013,
-          "order_index": 7,
-          "name": "Clara",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "atmete tief ein, und für einen flüchtigen Augenblick lag etwas in der Luft – Erinnerung, Schmerz, Sehnsucht. „Und was ist das Stück?“, fragte sie schließlich.",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000014,
-          "order_index": 8,
-          "name": "Jonas",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "lächelte schwach. „Es heißt Das Licht im Staub. Es handelt von zwei Menschen, die vergessen wurden. Von einer Frau, die zu spät kam, und einem Mann, der nie aufgehört hat zu warten.“",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000017,
-          "order_index": 9,
-          "name": "Clara",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "blickte zu Boden. „Klingt bekannt.“",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
-          "id": 1000019,
-          "order_index": 10,
-          "name": "Clara",
-          "mood": "",
-          "colors": "",
-          "movement_style": "",
-          "eye_candy": "",
-          "special_notes": "s Gesicht und ließ sie plötzlich jünger wirken. Sie trat in das Licht, als würde sie nach Jahren endlich dorthin zurückkehren, wo sie hingehörte. „Ich erinnere mich an die Premiere“, sagte sie leise. „Du hast hinter der Bühne gestanden",
-          "general_notes": "",
-          "prop_images": []
-        },
-        {
           "id": 1000020,
-          "order_index": 11,
+          "order_index": 1,
           "name": "Jonas",
           "mood": "",
           "colors": "",
@@ -271,7 +149,7 @@
         },
         {
           "id": 1000021,
-          "order_index": 12,
+          "order_index": 2,
           "name": "Clara",
           "mood": "",
           "colors": "",
@@ -283,7 +161,7 @@
         },
         {
           "id": 1000022,
-          "order_index": 13,
+          "order_index": 3,
           "name": "Clara",
           "mood": "",
           "colors": "",
@@ -295,7 +173,7 @@
         },
         {
           "id": 1000024,
-          "order_index": 14,
+          "order_index": 4,
           "name": "Clara",
           "mood": "",
           "colors": "",
@@ -307,7 +185,7 @@
         },
         {
           "id": 1000028,
-          "order_index": 15,
+          "order_index": 5,
           "name": "Jonas",
           "mood": "",
           "colors": "",
@@ -319,7 +197,7 @@
         },
         {
           "id": 1000029,
-          "order_index": 16,
+          "order_index": 6,
           "name": "Clara",
           "mood": "",
           "colors": "",
@@ -331,7 +209,7 @@
         },
         {
           "id": 1000030,
-          "order_index": 17,
+          "order_index": 7,
           "name": "Nacht",
           "mood": "",
           "colors": "",
@@ -344,10 +222,21 @@
         {
           "id": 42,
           "name": "asd",
-          "order_index": 18,
+          "order_index": 8,
           "mood": "asd",
           "colors": "asda",
           "movement_style": "sd",
+          "eye_candy": "",
+          "special_notes": "",
+          "general_notes": ""
+        },
+        {
+          "id": 43,
+          "name": "asd",
+          "order_index": 9,
+          "mood": "",
+          "colors": "",
+          "movement_style": "",
           "eye_candy": "",
           "special_notes": "",
           "general_notes": ""
@@ -599,6 +488,6 @@
     }
   ],
   "next_show_id": 49,
-  "next_song_id": 43,
+  "next_song_id": 44,
   "next_check_item_id": 37
 }
