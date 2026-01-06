@@ -8,47 +8,53 @@
           Cue-Liste als PDF exportieren
         </a>
       </div>
-      <!-- Neuen Song/Szene hinzufügen -->
+      <!-- Neuen Song/Szene hinzufügen (klappbar) -->
       <div class="card mb-4">
-        <div class="card-header">Neue Szene / Song anlegen</div>
-        <div class="card-body">
-          <form method="post" action="{{ url_for('add_song_route', show_id=show.id) }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="active_tab" value="songs">
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label class="form-label">Name / Cue-Name</label>
-                <input type="text" name="song_name" class="form-control form-control-sm">
+        <div class="card-header p-0">
+          <button class="btn btn-link w-100 text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddScene" aria-expanded="false" aria-controls="collapseAddScene">
+            Neue Szene / Song anlegen
+          </button>
+        </div>
+        <div id="collapseAddScene" class="collapse">
+          <div class="card-body">
+            <form method="post" action="{{ url_for('add_song_route', show_id=show.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="active_tab" value="songs">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name / Cue-Name</label>
+                  <input type="text" name="song_name" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Stimmung</label>
+                  <input type="text" name="song_mood" class="form-control form-control-sm">
+                </div>
               </div>
-              <div class="col-md-6">
-                <label class="form-label">Stimmung</label>
-                <input type="text" name="song_mood" class="form-control form-control-sm">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">Farben</label>
+                  <input type="text" name="song_colors" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Movement Style</label>
+                  <input type="text" name="song_movement_style" class="form-control form-control-sm">
+                </div>
               </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label class="form-label">Farben</label>
-                <input type="text" name="song_colors" class="form-control form-control-sm">
+              <div class="mb-3">
+                <label class="form-label">Eye Candy / Specials</label>
+                <input type="text" name="song_eye_candy" class="form-control form-control-sm">
               </div>
-              <div class="col-md-6">
-                <label class="form-label">Movement Style</label>
-                <input type="text" name="song_movement_style" class="form-control form-control-sm">
+              <div class="mb-3">
+                <label class="form-label">Special Notes</label>
+                <textarea name="song_special_notes" rows="2" class="form-control form-control-sm"></textarea>
               </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Eye Candy / Specials</label>
-              <input type="text" name="song_eye_candy" class="form-control form-control-sm">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Special Notes</label>
-              <textarea name="song_special_notes" rows="2" class="form-control form-control-sm"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Allgemeine Notizen</label>
-              <textarea name="song_general_notes" rows="2" class="form-control form-control-sm"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm">Szene / Song hinzufügen</button>
-          </form>
+              <div class="mb-3">
+                <label class="form-label">Allgemeine Notizen</label>
+                <textarea name="song_general_notes" rows="2" class="form-control form-control-sm"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Szene / Song hinzufügen</button>
+            </form>
+          </div>
         </div>
       </div>
       <!-- Bestehende Songs/Szenen -->

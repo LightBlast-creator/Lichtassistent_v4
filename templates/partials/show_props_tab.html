@@ -11,7 +11,9 @@
         <div class="mb-2">
           <select name="song_id" id="prop-song-select" class="form-select form-select-sm" required onchange="filterPropImagesBySong()">
             {% for song in show.songs %}
-              <option value="{{ song.id }}" {% if selected_song_id == song.id|string %}selected{% endif %}>{{ song.name }}</option>
+              <option value="{{ song.id }}" {% if selected_song_id == song.id|string %}selected{% endif %}>
+                Cue{{ song.order_index }}: {{ song.name }}
+              </option>
             {% endfor %}
           </select>
         </div>
