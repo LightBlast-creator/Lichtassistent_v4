@@ -70,86 +70,42 @@
             <div class="row mb-2 rig-item-row">
               <div class="col-md-2">
                 <label class="form-label">Anzahl</label>
-                <input type="text" name="rig_spots__count[]" class="form-control form-control-sm" value="{{ rig.spots or '' }}">
+                <input type="text" name="rig_spots__count[]" class="form-control form-control-sm" value="">
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <label class="form-label">Hersteller</label>
-                <select name="rig_spots__manufacturer[]" class="form-select form-select-sm">
+                <select name="rig_spots__manufacturer[]" class="form-select form-select-sm spots-manufacturer">
                   <option value="">–</option>
                   {% for m in manufacturers %}
-                    <option value="{{ m }}" {% if rig.manufacturer_spots == m %}selected{% endif %}>{{ m }}</option>
+                    <option value="{{ m }}">{{ m }}</option>
                   {% endfor %}
                 </select>
               </div>
               <div class="col-md-2">
                 <label class="form-label">Modell</label>
                 <input type="text" name="rig_spots__model[]" class="form-control form-control-sm spots-model" value="" list="spots-model-list-0">
-                  <datalist id="spots-model-list-0"></datalist>
-                </div>
-                <div class="col-md-2">
-                  <label class="form-label">Mode</label>
-                  <input type="text" name="rig_spots__mode[]" class="form-control form-control-sm spots-mode" value="" list="spots-mode-list-0">
-                  <datalist id="spots-mode-list-0"></datalist>
-                </div>
-                <div class="col-md-2">
-                  <label class="form-label">Universe</label>
-                  <input type="text" name="rig_spots__universe[]" class="form-control form-control-sm" value="{{ rig.universe_spots or '' }}">
-                </div>
-                <div class="col-md-2">
-                  <label class="form-label">Adresse</label>
-                  <input type="text" name="rig_spots__address[]" class="form-control form-control-sm" value="{{ rig.address_spots or '' }}">
-                </div>
-                <div class="col-md-1">
-                  <label class="form-label">Watt</label>
-                  <input type="text" name="rig_spots__watt[]" class="form-control form-control-sm" value="{{ rig.watt_spots or '' }}">
-                </div>
-                <div class="col-md-1">
-                  <label class="form-label">Phase</label>
-                  <input type="text" name="rig_spots__phase[]" class="form-control form-control-sm" value="{{ rig.phase_spots or '' }}">
-                </div>
-                <div class="col-md-1 d-flex align-items-end">
-                  <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>
-                </div>
-                  </div>
-            <div class="row mb-2 rig-item-row">
-              <div class="col-md-2">
-                <label class="form-label">Anzahl</label>
-                <input type="text" name="rig_beams__count[]" class="form-control form-control-sm" value="{{ rig.beams or '' }}">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label">Hersteller</label>
-                <select name="rig_beams__manufacturer[]" class="form-select form-select-sm">
-                  <option value="">–</option>
-                  {% for m in manufacturers %}
-                    <option value="{{ m }}" {% if rig.manufacturer_beams == m %}selected{% endif %}>{{ m }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label class="form-label">Modell</label>
-                <input type="text" name="rig_beams__model[]" class="form-control form-control-sm beams-model" value="" list="beams-model-list-0">
-                <datalist id="beams-model-list-0"></datalist>
+                <datalist id="spots-model-list-0"></datalist>
               </div>
               <div class="col-md-2">
                 <label class="form-label">Mode</label>
-                <input type="text" name="rig_beams__mode[]" class="form-control form-control-sm beams-mode" value="" list="beams-mode-list-0">
-                <datalist id="beams-mode-list-0"></datalist>
+                <input type="text" name="rig_spots__mode[]" class="form-control form-control-sm spots-mode" value="" list="spots-mode-list-0">
+                <datalist id="spots-mode-list-0"></datalist>
               </div>
               <div class="col-md-2">
                 <label class="form-label">Universe</label>
-                <input type="text" name="rig_beams__universe[]" class="form-control form-control-sm" value="{{ rig.universe_beams or '' }}">
+                <input type="text" name="rig_spots__universe[]" class="form-control form-control-sm" value="">
               </div>
               <div class="col-md-2">
                 <label class="form-label">Adresse</label>
-                <input type="text" name="rig_beams__address[]" class="form-control form-control-sm" value="{{ rig.address_beams or '' }}">
+                <input type="text" name="rig_spots__address[]" class="form-control form-control-sm" value="">
               </div>
               <div class="col-md-1">
                 <label class="form-label">Watt</label>
-                <input type="text" name="rig_beams__watt[]" class="form-control form-control-sm" value="{{ rig.watt_beams or '' }}">
+                <input type="text" name="rig_spots__watt[]" class="form-control form-control-sm" value="">
               </div>
               <div class="col-md-1">
                 <label class="form-label">Phase</label>
-                <input type="text" name="rig_beams__phase[]" class="form-control form-control-sm" value="{{ rig.phase_beams or '' }}">
+                <input type="text" name="rig_spots__phase[]" class="form-control form-control-sm" value="">
               </div>
               <div class="col-md-1 d-flex align-items-end">
                 <button type="button" class="btn btn-sm btn-outline-danger remove-row">−</button>

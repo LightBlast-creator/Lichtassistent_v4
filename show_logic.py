@@ -61,6 +61,7 @@ def _empty_rig_setup() -> Dict:
         "phase_spots": "",
         "models_spots": [],
         "modes_spots": [],
+        "spots_items": [],
 
         # Washes
         "washes": "",

@@ -1,3 +1,12 @@
+/* Einheitliche Größe für PDF-Import und PDF-Export Buttons */
+.btn-cue-action {
+  min-width: 180px;
+  height: 38px;
+  font-size: 1rem;
+  padding: 0 1.2rem;
+  display: inline-block;
+  line-height: 1.2;
+}
 /* Cue-Liste als PDF exportieren: Türkis */
 .btn-highlight.btn-outline-info {
   background: linear-gradient(90deg, #00bcd4 0%, #4dd0e1 100%);

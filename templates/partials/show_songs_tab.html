@@ -1,10 +1,9 @@
 <div class="tab-pane fade {% if active_tab == 'songs' %}show active{% endif %}" id="tab-songs">
   <div class="row">
     <div class="col-md-8">
-      {% include "partials/import_cuelist_pdf.html" %}
-      <!-- PDF-Export-Button für Cue-Liste -->
-      <div class="d-flex justify-content-end mb-2">
-        <a href="{{ url_for('export_cuelist_pdf', show_id=show.id) }}" class="btn btn-outline-info btn-sm btn-highlight">
+      <div class="d-flex gap-2 justify-content-end mb-2">
+        {% include "partials/import_cuelist_pdf.html" %}
+        <a href="{{ url_for('export_cuelist_pdf', show_id=show.id) }}" class="btn btn-outline-info btn-sm btn-highlight btn-cue-action">
           Cue-Liste als PDF exportieren
         </a>
       </div>
