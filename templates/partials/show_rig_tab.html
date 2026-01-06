@@ -114,7 +114,7 @@
           {% endif %}
         </div>
         <div class="mb-3">
-          <button type="button" id="add-beam-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
+          <button type="button" id="add-spot-row" class="btn btn-sm btn-outline-light">+ Gerät hinzufügen</button>
         </div>
 
         <!-- Washes -->
@@ -766,7 +766,10 @@
     const addBtn = document.getElementById(addButtonId);
     const container = document.getElementById(containerId);
     if (!addBtn || !container) return;
-    addBtn.addEventListener('click', function() {
+    // Remove any previous click handlers by cloning the node
+    const newAddBtn = addBtn.cloneNode(true);
+    addBtn.parentNode.replaceChild(newAddBtn, addBtn);
+    newAddBtn.addEventListener('click', function() {
       const first = container.querySelector('.rig-item-row');
       if (!first) return;
       const clone = first.cloneNode(true);

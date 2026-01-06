@@ -1,6 +1,6 @@
 # <-- WICHTIG: Flask-App importieren
 from app import app
-from show_logic import find_show, MANUFACTURERS, save_data, sync_entire_show_to_db, remove_song_from_show, remove_show
+from show_logic import find_show, MANUFACTURERS, save_data, sync_entire_show_to_db, remove_song_from_show, remove_show, create_check_item, create_song
 # Übernahme der erkannten Cues als neue Szenen/Songs
 import json
 import html
