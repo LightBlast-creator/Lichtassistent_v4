@@ -1,3 +1,21 @@
+/* GDTF Button besonders hervorheben */
+.btn-gdtf {
+  background: linear-gradient(90deg, #ff9800 0%, #ffc107 100%);
+  color: #222;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid #ff9800;
+  box-shadow: 0 2px 12px rgba(255, 193, 7, 0.25);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-gdtf:hover, .btn-gdtf:focus {
+  background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+  color: #111;
+  transform: scale(1.07);
+  box-shadow: 0 4px 24px rgba(255, 193, 7, 0.35);
+}
 /* Einheitliche Größe für PDF-Import und PDF-Export Buttons */
 .btn-cue-action {
   min-width: 180px;

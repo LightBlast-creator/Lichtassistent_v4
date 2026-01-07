@@ -17,7 +17,29 @@ sys.modules["app"] = sys.modules.get(__name__)
 
 
 # Flask-App
+
+
 app = Flask(__name__, template_folder="templates")
+
+# GDTF Fixture Search Dummy-Route (früh registrieren)
+@app.route('/gdtf_fixture_search')
+def gdtf_fixture_search():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    return '<h2>GDTF Fixture Suche (Demo)</h2><p>Hier kommt die API-Suche hin.</p>'
+
+# GDTF-Token Einstellungen-Route (früh registrieren)
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    saved = False
+    if request.method == 'POST':
+        token = request.form.get('gdtf_token', '').strip()
+        session['gdtf_token'] = token
+        saved = True
+    gdtf_token = session.get('gdtf_token', '')
+    return render_template('settings.html', gdtf_token=gdtf_token, saved=saved)
 
 # Register Blueprint for show routes
 from routes_shows import shows_bp

@@ -4,6 +4,9 @@
     <div class="col-md-8">
       <form method="post" action="{{ url_for('update_rig', show_id=show.id) }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="mb-3">
+          <a href="https://gdtf-share.com/" target="_blank" class="btn btn-gdtf mb-2">GDTF holen</a>
+        </div>
         <!-- Main Brand -->
         <div class="mb-3">
           <label class="form-label">Main Brand (Hausrig / Hauptmarke)</label>
@@ -16,7 +19,10 @@
         </div>
 
         <!-- Spots -->
-        <h5 class="h6 mt-3">Spots</h5>
+        <div class="d-flex align-items-center mt-3 mb-2">
+          <h5 class="h6 mb-0">Spots</h5>
+          <a href="{{ url_for('gdtf_fixture_search') }}" class="btn btn-gdtf btn-sm ms-3">GDTF Fixture suchen</a>
+        </div>
         <div id="spots-rows" class="mb-2">
           {% set items = rig.spots_items if rig and rig.spots_items is defined else None %}
           {% if items %}
