@@ -53,8 +53,7 @@ from show_logic import shows, save_data
 # Dashboard: Show creation form + show list
 @app.route('/', methods=['GET', 'POST'])
 def dashboard():
-    from show_logic import load_data
-    load_data()
+    # ...existing code...
     if 'user' not in session:
         return redirect(url_for('login'))
     if request.method == 'POST':

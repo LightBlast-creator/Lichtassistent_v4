@@ -31,7 +31,7 @@
          class="btn btn-secondary btn-sm btn-highlight">
         Export MA3 Plugin
       </a>
-      <form method="post" action="{{ url_for('delete_show', show_id=show.id) }}"
+      <form method="post" action="{{ url_for('shows_bp.delete_show', show_id=show.id) }}"
             onsubmit="return confirm('Show wirklich löschen?');">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button type="submit" class="btn btn-danger btn-sm btn-highlight">

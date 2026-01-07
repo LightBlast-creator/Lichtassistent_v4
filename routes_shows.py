@@ -819,34 +819,19 @@ def delete_check_item_route(show_id: int):
 
     return redirect(url_for("show_detail", show_id=show_id, tab="meta") + "#checklists")
 
-
-
-@app.route("/show/<int:show_id>/delete", methods=["POST"])
+@shows_bp.route("/show/<int:show_id>/delete", methods=["POST"])
 def delete_show(show_id: int):
     """Route: komplette Show löschen (JSON + DB)."""
     show = find_show(show_id)
     if not show:
         abort(404)
-
-
-    # JSON
     remove_show(show_id)
     save_data()
-
-    # DB
-    try:
-        db_show = ShowModel.query.get(show_id)
-        if db_show:
-            db.session.delete(db_show)
-            db.session.commit()
-    except Exception as e:
-        db.session.rollback()
-        print(f"[DB] Fehler beim Löschen der Show {show_id}: {e}")
-
-    # Synchronisiere die in-memory-Liste shows nach DB-Löschung
-    from show_logic import load_data
-    load_data()
-
+    # sync_entire_show_to_db is not needed after deletion
+    # AJAX/XHR: Kein Redirect, sondern leere Antwort
+    from flask import request, make_response
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return ('', 204)
     return redirect(url_for("dashboard"))
 
 
