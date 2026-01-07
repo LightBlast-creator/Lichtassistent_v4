@@ -65,6 +65,26 @@
 <body class="bg-dark text-light">
     {% block content %}{% endblock %}
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='js/show_detail.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='js/show_detail.js') }}"></script>
+        <script>
+            function setGdtfButtonsState() {
+                const gdtfButtons = document.querySelectorAll('a.btn-gdtf, button.btn-gdtf');
+                gdtfButtons.forEach(btn => {
+                    btn.disabled = !navigator.onLine;
+                    if (!navigator.onLine) {
+                        btn.classList.add('disabled');
+                        btn.setAttribute('aria-disabled', 'true');
+                        btn.title = 'Keine Internetverbindung';
+                    } else {
+                        btn.classList.remove('disabled');
+                        btn.removeAttribute('aria-disabled');
+                        btn.title = '';
+                    }
+                });
+            }
+            window.addEventListener('online', setGdtfButtonsState);
+            window.addEventListener('offline', setGdtfButtonsState);
+            document.addEventListener('DOMContentLoaded', setGdtfButtonsState);
+        </script>
 </html>

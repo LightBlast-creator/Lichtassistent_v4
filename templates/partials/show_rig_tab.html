@@ -10,7 +10,7 @@
         <!-- Main Brand -->
         <div class="mb-3">
           <label class="form-label">Main Brand (Hausrig / Hauptmarke)</label>
-          <select name="rig_main_brand" class="form-select form-select-sm">
+          <select name="rig_main_brand" class="form-select form-select-sm" style="max-width:300px; min-width:180px; display:inline-block;">
             <option value="">– auswählen –</option>
             {% for m in manufacturers %}
               <option value="{{ m }}" {% if rig.main_brand == m %}selected{% endif %}>{{ m }}</option>
