@@ -1,11 +1,18 @@
-# Imports and Blueprint creation
+
+
+from flask import send_file
+from exports.export_nomad_csv import export_cues_to_csv
 from flask import Blueprint
 shows_bp = Blueprint("shows_bp", __name__)
-from app import app
-from show_logic import find_show, MANUFACTURERS, save_data, sync_entire_show_to_db, remove_song_from_show, remove_show, create_check_item, create_song, toggle_check_item
-# Übernahme der erkannten Cues als neue Szenen/Songs
-import json
-import html
+from show_logic import find_show, save_data, sync_entire_show_to_db, MANUFACTURERS
+
+# ETC Nomad CSV Export
+@shows_bp.route("/show/<int:show_id>/export_nomad_csv", methods=["GET"])
+def export_nomad_csv(show_id: int):
+    file_path = f"exports/nomad_show_{show_id}.csv"
+    export_cues_to_csv(show_id, file_path)
+    return send_file(file_path, as_attachment=True, download_name=f"nomad_show_{show_id}.csv")
+
 
 # Löscht alle Cues (Songs) für eine Show
 @shows_bp.route("/show/<int:show_id>/delete_all_cues", methods=["POST"])
@@ -18,8 +25,7 @@ def delete_all_cues(show_id):
     sync_entire_show_to_db(show)
     return redirect(url_for("shows_bp.show_detail", show_id=show_id))
 
-# Übernahme der erkannten Cues als neue Szenen/Songs
-@app.route("/show/<int:show_id>/import_cuelist_pdf_commit", methods=["POST"])
+@shows_bp.route("/show/<int:show_id>/import_cuelist_pdf_commit", methods=["POST"])
 def import_cuelist_pdf_commit(show_id: int):
     show = find_show(show_id)
     if not show:

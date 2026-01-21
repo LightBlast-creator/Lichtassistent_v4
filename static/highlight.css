@@ -1,3 +1,21 @@
+/* ETC Nomad CSV Button besonders hervorheben */
+.btn-etc {
+  background: linear-gradient(90deg, #43ea5e 0%, #ffe600 100%);
+  color: #222;
+  font-size: 1.05rem;
+  font-weight: bold;
+  border: 2px solid #43ea5e;
+  box-shadow: 0 2px 12px rgba(67, 234, 94, 0.18);
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-etc:hover, .btn-etc:focus {
+  background: linear-gradient(90deg, #ffe600 0%, #43ea5e 100%);
+  color: #111;
+  transform: scale(1.07);
+  box-shadow: 0 4px 24px rgba(67, 234, 94, 0.28);
+}
 /* GDTF Button besonders hervorheben */
 .btn-gdtf {
   background: linear-gradient(90deg, #ff9800 0%, #ffc107 100%);

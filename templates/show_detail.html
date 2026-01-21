@@ -31,6 +31,10 @@
          class="btn btn-secondary btn-sm btn-highlight">
         Export MA3 Plugin
       </a>
+      <a href="{{ url_for('shows_bp.export_nomad_csv', show_id=show.id) }}"
+         class="btn btn-sm btn-highlight" style="background: #43ea5e; color: #222; font-weight: bold; border: 2px solid #43ea5e;">
+        Export ETC Nomad CSV
+      </a>
       <form method="post" action="{{ url_for('shows_bp.delete_show', show_id=show.id) }}"
             onsubmit="return confirm('Show wirklich löschen?');">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
