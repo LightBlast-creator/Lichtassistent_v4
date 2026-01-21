@@ -37,9 +37,12 @@ def settings():
     if request.method == 'POST':
         token = request.form.get('gdtf_token', '').strip()
         session['gdtf_token'] = token
+        autosave_interval = request.form.get('autosave_interval', '0')
+        session['autosave_interval'] = autosave_interval
         saved = True
     gdtf_token = session.get('gdtf_token', '')
-    return render_template('settings.html', gdtf_token=gdtf_token, saved=saved)
+    autosave_interval = session.get('autosave_interval', '0')
+    return render_template('settings.html', gdtf_token=gdtf_token, autosave_interval=autosave_interval, saved=saved)
 
 # Register Blueprint for show routes
 from routes_shows import shows_bp

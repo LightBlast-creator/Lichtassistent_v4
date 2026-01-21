@@ -1,3 +1,64 @@
+// AUTOSAVE-COUNTDOWN nur in Show-Detail
+let autosaveCountdownTimer = null;
+let autosaveNext = null;
+
+function getAutosaveInterval() {
+  // Hole Intervall aus localStorage, falls vorhanden, sonst aus sessionStorage (vom Server gesetzt)
+  let ms = Number(localStorage.getItem('autosaveInterval'));
+  if (!ms || isNaN(ms)) {
+    // Versuche aus sessionStorage (wird beim Laden der Show-Detail-Seite gesetzt)
+    ms = Number(sessionStorage.getItem('autosaveInterval'));
+  }
+  return isNaN(ms) ? 0 : ms;
+}
+
+// Setze das Intervall aus der Session (wird vom Server im Template gesetzt)
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof AUTOSAVE_INTERVAL_FROM_SERVER !== 'undefined') {
+    sessionStorage.setItem('autosaveInterval', AUTOSAVE_INTERVAL_FROM_SERVER);
+  }
+});
+
+function saveAllRiders() {
+  // TODO: Hier Backend-Logik zum Speichern aller Rider einbinden
+  // Beispiel: fetch('/save_riders', { method: 'POST', body: ... })
+  const now = new Date();
+  autosaveNext = Date.now() + getAutosaveInterval();
+  console.log('Rider-Daten wurden automatisch gespeichert:', now);
+}
+
+function setAutosaveCountdown(ms) {
+  if (autosaveCountdownTimer) clearInterval(autosaveCountdownTimer);
+  const countdown = document.getElementById('autosave-countdown');
+  if (ms > 0 && countdown) {
+    autosaveNext = Date.now() + ms;
+    autosaveCountdownTimer = setInterval(function() {
+      const diff = autosaveNext - Date.now();
+      if (diff > 0) {
+        const sec = Math.ceil(diff / 1000);
+        countdown.textContent = 'Nächster Autosave in: ' + sec + 's';
+      } else {
+        countdown.textContent = 'Nächster Autosave in: ...';
+      }
+    }, 1000);
+  } else if (countdown) {
+    countdown.textContent = '';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Nur in Show-Detail aktivieren
+  if (document.getElementById('autosave-countdown')) {
+    const ms = getAutosaveInterval();
+    if (ms > 0) {
+      setAutosaveCountdown(ms);
+      setInterval(function() {
+        saveAllRiders();
+        setAutosaveCountdown(ms);
+      }, ms);
+    }
+  }
+});
 const KEY_FOCUS = 'la_focus_cue';
 const OFFSET_TOP = 110;
 const safeInt = (v) => {

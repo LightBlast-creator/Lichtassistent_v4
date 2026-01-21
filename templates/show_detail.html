@@ -1,5 +1,13 @@
+
 {% extends "base.html" %}
 {% set active_tab = request.args.get("tab", "meta") %}
+{% if autosave_interval is defined %}
+<script>var AUTOSAVE_INTERVAL_FROM_SERVER = {{ autosave_interval|tojson }};</script>
+{% endif %}
+<!-- Autosave-Countdown -->
+<div class="mb-2" style="text-align:right;">
+  <span id="autosave-countdown" style="color: #aaa; font-size: 0.95em;"></span>
+</div>
 
 
 
